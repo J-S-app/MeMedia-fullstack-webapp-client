@@ -79,6 +79,7 @@ justify-content: space-between;
 
 .Post-buttom-icon{
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .Post-like-counter{

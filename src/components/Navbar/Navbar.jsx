@@ -16,8 +16,13 @@ const Navbar = () => {
       </div>
 
       <div className="Navbar-center">
-        <HomeIcon htmlColor="white" className="Navbar-center-item" />
+      <NavLink to='/' >
+      <HomeIcon htmlColor="white" className="Navbar-center-item" />
+      </NavLink>
+       
+        <NavLink to='/search'>
         <PageviewIcon htmlColor="white" className="Navbar-center-item" />
+        </NavLink>
       </div>
 
       <div className="Navbar-right">
