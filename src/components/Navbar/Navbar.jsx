@@ -19,6 +19,28 @@ const Navbar = () => {
         <HomeIcon htmlColor="white" className="Navbar-center-item" />
         <PageviewIcon htmlColor="white" className="Navbar-center-item" />
       </div>
+
+      <div className="Navbar-right">
+
+
+       {/* We need to add condition if user is login shows this part  */}
+{/*          
+          <button className="Nav-logoutbtn">Logout</button>
+            <NavLink to='/' className="authLink">
+              <img src={require("../../assets/profileImage/a.jpeg")} className='Navbar-profile-img' />
+            </NavLink>
+             */}
+
+          
+            <NavLink to='/auth/signup' className="authLink">
+              Sign up
+            </NavLink>
+            <NavLink to='/auth/login' className="authLink">
+              Log in
+            </NavLink>
+        
+      
+      </div>
    
      
     </div>
