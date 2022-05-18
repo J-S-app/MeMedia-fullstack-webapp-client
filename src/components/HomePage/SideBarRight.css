@@ -1,0 +1,47 @@
+.SideBar-right{
+  flex: 3;
+  padding: 10px;
+}
+
+.SideBar-right-container{
+  margin: 40px;
+
+}
+
+.SideBar-right-birthday{
+  
+  display: flex;
+  align-items: flex-end;
+}
+
+
+.SideBar-right-birthday-icon{
+  margin-right: 5px;
+}
+
+.SideBar-right-random-meme-title{
+  margin-top: 50px;
+  padding: 0 10px;
+
+}
+
+.SideBar-right-random-meme{
+  padding: 0 10px;
+ width: 90%;
+ margin-bottom: 30px;
+
+
+}
+
+.SideBar-right-online-followers-item{
+  display: flex;
+  align-items: center;
+}
+
+.SideBar-right-fallowers-image{
+  margin-right: 10px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}

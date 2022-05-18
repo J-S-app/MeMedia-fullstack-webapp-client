@@ -1,0 +1,98 @@
+.Post{
+  width: 100%;
+  border-radius: 8px;
+  margin: 20px;
+  background-color: white;
+  -webkit-box-shadow: 0px 10px 13px -7px #d6d6d6, 25px -14px 15px 26px rgba(242, 242, 242, 0.827); 
+box-shadow: 0px 10px 13px -7px #b5b4b4, 25px -14px 15px 26px rgba(242, 242, 242, 0.093);
+}
+
+.Post-container{
+  padding: 20px;
+}
+
+.Post-profile-img{
+  width: 40px;
+  margin-right: 8px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.Post-top{
+  display: flex;
+  align-items: center;
+ 
+}
+.Post-title{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.Post-username{
+  font-weight: 600;
+}
+
+.Post-date{
+  color: rgb(142, 142, 142);
+  font-size: 13px;
+  
+}
+
+.Post-center{
+  margin: 20px 0;
+}
+
+
+.Post-shared-img{
+  width: 100%;
+  margin-top: 20px;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.Post-buttom{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+.Post-buttom-left{
+  display: flex;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.Post-buttom-left-left-icon{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Post-buttom-left-right-icon{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+.Post-buttom-icon{
+  margin-right: 5px;
+}
+
+.Post-like-counter{
+  color: rgb(80, 80, 80);
+  font-size: 13px;
+}
+
+.Post-buttom-right{
+display: flex;
+justify-content: flex-end;
+margin-top: 8px;
+}
+
+.Post-comment-counter{
+  color: rgb(80, 80, 80);
+  font-size: 14px;
+}
