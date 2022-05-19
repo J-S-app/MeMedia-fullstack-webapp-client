@@ -1,0 +1,54 @@
+.ProfilePage-container {
+  display: flex;
+  width: 100%;
+}
+
+.ProfilePage-right{
+  flex: 9;
+}
+
+.ProfilePage-right-bottom{
+display: flex;
+}
+
+.ProfilePage-right-top-images{
+  height: 350px;
+  position: relative;
+}
+
+.ProfilePage-right-top-coverimage{
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+
+.ProfilePage-right-top-profileimage{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  left: 40px;
+  top: 170px;
+  border: 3px solid whitesmoke;
+ 
+}
+
+.ProfilePage-right-top-userinfo{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  left: 215px;
+  top: 220px;
+}
+
+.ProfilePage-right-top-username{
+  color:white;
+  text-shadow: 2px 1px 8px #000000;
+}
+
+.ProfilePage-right-top-catchphrase{
+width: 80%;
+text-align: start;
+}
