@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class APIServices {
     constructor() {
-        thisapi = axios.create({baseURL: 'http://localhost:5005/api'})
+        this.api = axios.create({baseURL: 'http://localhost:5005/api'})
     }
 
     //Auth methods
