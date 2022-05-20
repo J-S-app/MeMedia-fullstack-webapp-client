@@ -9,9 +9,9 @@ import {format} from 'timeago.js';
 import apiServices from '../../services/APIServices';
 
 
-const Post = ({post}) => {
+const Post = ({post,callBackFeeds}) => {
   //add state for like functionality
-  const [like, setLike] = useState(0)
+  const [like, setLike] = useState(post.postLikes.length)
   const [postOwner, setpostOwner] = useState('')
   const [likeColor, setLikeColor] = useState('pink')
   const [isLiked, setIsLiked] = useState(false)
@@ -29,9 +29,28 @@ const Post = ({post}) => {
   apiServices
   .userDetailsRoute(post.postOwner,header)
   .then(response=>setpostOwner(response.data))
-  .catch(e=>console.log('error getting user detail ',e))
+  .catch(error=>{
+     const errorDescription = error.response.data.errorMessage;
+    console.log("error getting user detail", errorDescription)
+    setErrorMessage(errorDescription);})
  }, [])
- 
+
+
+
+
+const handlePostDelete=()=>{
+  apiServices
+  .deletePostRoute(post._id,header)
+  .then(response=>callBackFeeds())
+  .catch(error=>{  
+    const errorDescription = error.response.data.errorMessage;
+    console.log("error deleteing post ", errorDescription)
+    setErrorMessage(errorDescription);})
+
+    
+}
+
+
 
 
 
@@ -56,15 +75,15 @@ const Post = ({post}) => {
           <div className='Post-buttom-left-left-icon'>
             <ModeCommentIcon htmlColor='CadetBlue' className='Post-buttom-icon' />
             <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-            <span className='Post-like-counter'> {like} people like this</span>
+            <span className='Post-like-counter'> {like ==0 ? `` : `${like} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
-              <DeleteIcon htmlColor='gray' className='Post-buttom-icon ' />
+              <DeleteIcon onClick={handlePostDelete} htmlColor='gray' className='Post-buttom-icon ' />
               <EditIcon htmlColor='gray' className='Post-buttom-icon' />
             </div>
           </div>
           <div className='Post-buttom-right'>
-            <span className='Post-comment-counter'>XX comments</span>
+            <span className='Post-comment-counter'>{post?.postComments.length >1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment` } </span>
           </div>
         </div>
       </div>

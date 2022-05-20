@@ -43,8 +43,8 @@ class APIServices {
 
     // Posts methods
 
-    createPostRoute = () => {
-        return this.api.post('/posts')
+    createPostRoute = (header) => {
+        return this.api.post('/posts',header)
     }
 
     getPostListRoute = (header) => {
@@ -63,8 +63,8 @@ class APIServices {
         return this.api.put(`/posts/${postId}`)
     }
 
-    deletePostRoute = () => {
-        return this.api.delete(`/posts/${postId}`)
+    deletePostRoute = (postId,header) => {
+        return this.api.delete(`/posts/${postId}`,header)
     }
 
     //Comments methods

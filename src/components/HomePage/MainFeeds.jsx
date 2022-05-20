@@ -12,28 +12,36 @@ const MainFeeds = () => {
 
   const storedToken = localStorage.getItem("authToken");
 
+  const callBackFeeds =()=>{
+    apiServices
+    .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
+    .then(response => setPosts(response.data))
+    .catch(error => {
+      const errorDescription = error.response.data.errorMessage;
+      console.log("error getting all posts", errorDescription)
+      setErrorMessage(errorDescription);
+    })
+  }
+
   //getting all postes in database
   useEffect(() => {
-    apiServices
-      .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
-      .then(response => setPosts(response.data))
-      .catch(e => console.log('error getting list of posts', e))
+    callBackFeeds()
 
   }, [])
 
 
   return (
     <>
-      {posts.length > 0
-        ? <div className='Main-feeds'>
-          <CreatePost />
-          {posts.map(post=> <Post key={post._id} post={post}  />)}
-         
-
-        </div>
-        : <p>is loading ....</p>
-    }
-
+      <div className='Main-feeds'>
+        <CreatePost />
+        {posts.length > 0
+          ?
+          <>
+            {posts.map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+          </>
+          : ''
+        }
+      </div>
     </>
 
   )
