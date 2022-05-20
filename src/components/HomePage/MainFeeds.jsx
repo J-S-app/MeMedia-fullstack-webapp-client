@@ -28,7 +28,7 @@ const MainFeeds = () => {
   useEffect(() => {
     callBackFeeds()
 
-  }, [])
+  }, [posts.postLikes])
 
 
   return (

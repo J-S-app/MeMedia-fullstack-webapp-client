@@ -29,36 +29,49 @@ const Post = ({ post, callBackFeeds }) => {
   //add on click function for like functionality
 
 
+// useEffect(() => {
+//   alreadyLiked()
+// }, [])
+
+
+
 
   const likeHandler = () => {
-    // setLike(preLike => isLiked ? preLike - 1 : preLike + 1);
-    // setIsLiked(!isLiked);
-    // isLiked ? setLikeColor('pink') : setLikeColor('Crimson');
-    alreadyLiked()
+    // alreadyLiked()
+
 
     const postId = post._id
 
     apiServices
-    .likesPostRoute(postId,header,header)
-    .then(response=>console.log(response))
-    .catch(error=>{
-      const errorDescription = error.response.data.errorMessage;
-     console.log("error like post ", errorDescription)
-     setErrorMessage(errorDescription);})
+      .likesPostRoute(postId, header, header)
+      .then(response => {
+        callBackFeeds()
+        // setLike(preLike => preLike.includes(user._id) ? setLikeColor('Crimson') : setLikeColor('pink') )
+      })
+      .catch(error => {
+        const errorDescription = error.response.data.errorMessage;
+        console.log("error like post ", errorDescription)
+        setErrorMessage(errorDescription);
+      })
 
   }
 
-// const alreadyLiked =()=>{
-//   if(user){
-//     if(like.includes(user._id)){
-//       setLikeColor('Crimson') 
-//       setLike()
-//     }else{
-//       setLikeColor('pink');
-//     }
-     
+
+//   const alreadyLiked = () => {
+
+// if(user){
+//   if((post.postLikes).includes(user._id)){
+//    return setLikeColor('Crimson')
+//   }else{
+//       return setLikeColor('pink') 
 //   }
 // }
+
+
+
+
+
+  // }
 
 
 
@@ -115,7 +128,7 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {like.length == 0 ? `` : `${like.length} people like this`} </span>
+              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes.length} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               <DeleteIcon onClick={handlePostDelete} htmlColor='gray' className='Post-buttom-icon ' />
