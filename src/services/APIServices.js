@@ -2,21 +2,21 @@ import axios from 'axios'
 
 class APIServices {
     constructor() {
-        this.api = axios.create({baseURL: 'http://localhost:5005/api'})
+        this.api = axios.create({baseURL: process.env.REACT_APP_API_URL})
     }
 
     //Auth methods
 
-    registerRoute = () => {
-        return this.api.post('/signup')
+    registerRoute = (requestBody) => {
+        return this.api.post('/auth/signup',requestBody)
     }
 
-    loginRoute = () => {
-        return this.api.post('/login')
+    loginRoute = (requestBody) => {
+        return this.api.post('/auth/login',requestBody)
     }
 
     verifyRoute = () => {
-        return this.api.get('/verify')
+        return this.api.get('/auth/verify')
     }
 
     // User methods
