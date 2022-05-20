@@ -1,0 +1,7 @@
+.Comment-profile-img{
+  width: 40px;
+  margin-right: 5px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
