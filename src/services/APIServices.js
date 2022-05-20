@@ -21,8 +21,8 @@ class APIServices {
 
     // User methods
 
-    userDetailsRoute = () => {
-        return this.api.get(`/users/${userId}`)
+    userDetailsRoute = (userId,header) => {
+        return this.api.get(`/users/${userId}`,header)
     }
 
     updateUserRoute = () => {
@@ -47,8 +47,8 @@ class APIServices {
         return this.api.post('/posts')
     }
 
-    getPostListRoute = () => {
-        return this.api.get('/posts')
+    getPostListRoute = (header) => {
+        return this.api.get('/posts',header)
     }
 
     getOnePostRoute = () => {
