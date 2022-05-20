@@ -47,7 +47,10 @@ const CreatePost = ({ callBackFeeds }) => {
     if (user) {
       apiServices
         .userDetailsRoute(user._id, header)
-        .then(response => setUserdet(response.data))
+        .then(response => {
+          setUserdet(response.data)
+          callBackFeeds()
+        })
         .catch(error => {
           const errorDescription = error.response.data.errorMessage;
           console.log("error getting user detail", errorDescription)
