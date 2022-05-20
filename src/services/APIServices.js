@@ -77,8 +77,8 @@ class APIServices {
         return this.api.put(`/posts/${postId}/${commentId}`)
     }
 
-    likesCommentRoute = () => {
-        return this.api.put(`/comments/${commentId}`)
+    likesCommentRoute = (commentId,headers,header) => {
+        return this.api.put(`/comments/${commentId}`,headers,header)
     }
 }
 

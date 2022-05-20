@@ -183,7 +183,7 @@ const Post = ({ post, callBackFeeds }) => {
 
             </div>
             <div className='Post-buttom-comment-list'>
-              {post.postComments.map(comment=> <Comment key={comment._id} comment={comment} />).reverse()}
+              {post.postComments.map(comment=> <Comment callBackFeeds={callBackFeeds} key={comment._id} comment={comment} />).reverse()}
             </div>
           </div>
 

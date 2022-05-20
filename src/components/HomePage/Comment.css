@@ -5,3 +5,8 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+
+.Comment-title-like-icon{
+  cursor: pointer;
+}
