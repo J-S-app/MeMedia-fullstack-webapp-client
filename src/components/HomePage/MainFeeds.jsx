@@ -15,7 +15,7 @@ const MainFeeds = () => {
   const callBackFeeds =()=>{
     apiServices
     .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
-    .then(response => setPosts(response.data))
+    .then(response => setPosts(response.data.reverse()))
     .catch(error => {
       const errorDescription = error.response.data.errorMessage;
       console.log("error getting all posts", errorDescription)
@@ -33,7 +33,7 @@ const MainFeeds = () => {
   return (
     <>
       <div className='Main-feeds'>
-        <CreatePost />
+        <CreatePost callBackFeeds={callBackFeeds} />
         {posts.length > 0
           ?
           <>

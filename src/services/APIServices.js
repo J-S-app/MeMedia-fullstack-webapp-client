@@ -43,8 +43,8 @@ class APIServices {
 
     // Posts methods
 
-    createPostRoute = (header) => {
-        return this.api.post('/posts',header)
+    createPostRoute = (requestBody,header) => {
+        return this.api.post('/posts',requestBody,header)
     }
 
     getPostListRoute = (header) => {
