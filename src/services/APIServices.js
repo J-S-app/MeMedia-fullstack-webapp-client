@@ -59,8 +59,8 @@ class APIServices {
         return this.api.put(`/posts/${postId}/edit`,requestBody,header)
     }
 
-    likesPostRoute = (postId,header) => {
-        return this.api.put(`/posts/${postId}`,header)
+    likesPostRoute = (postId,headers,header) => {
+        return this.api.put(`/posts/${postId}`,headers,header)
     }
 
     deletePostRoute = (postId,header) => {

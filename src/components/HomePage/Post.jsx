@@ -7,18 +7,19 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { format } from 'timeago.js';
 import apiServices from '../../services/APIServices';
+import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context'
 
 
 
 const Post = ({ post, callBackFeeds }) => {
   //add state for like functionality
-  const [like, setLike] = useState(post.postLikes.length)
+  const [like, setLike] = useState(post.postLikes)
   const [postOwner, setpostOwner] = useState('')
   const [likeColor, setLikeColor] = useState('pink')
   const [isLiked, setIsLiked] = useState(false)
   const [errorMessage, setErrorMessage] = useState(undefined);
-
+  const { isLoggedIn, isLoading, user } = useContext(AuthContext);
 
 
 
@@ -26,22 +27,41 @@ const Post = ({ post, callBackFeeds }) => {
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
   //add on click function for like functionality
+
+
+
   const likeHandler = () => {
-    setLike(preLike => isLiked ? preLike - 1 : preLike + 1);
-    setIsLiked(!isLiked);
-    isLiked ? setLikeColor('pink') : setLikeColor('Crimson');
+    // setLike(preLike => isLiked ? preLike - 1 : preLike + 1);
+    // setIsLiked(!isLiked);
+    // isLiked ? setLikeColor('pink') : setLikeColor('Crimson');
+    alreadyLiked()
 
     const postId = post._id
 
-    // apiServices
-    // .likesPostRoute(postId,header)
-    // .then(response=>console.log(response))
-    // .catch(error=>{
-    //   const errorDescription = error.response.data.errorMessage;
-    //  console.log("error like post ", errorDescription)
-    //  setErrorMessage(errorDescription);})
+    apiServices
+    .likesPostRoute(postId,header,header)
+    .then(response=>console.log(response))
+    .catch(error=>{
+      const errorDescription = error.response.data.errorMessage;
+     console.log("error like post ", errorDescription)
+     setErrorMessage(errorDescription);})
 
   }
+
+// const alreadyLiked =()=>{
+//   if(user){
+//     if(like.includes(user._id)){
+//       setLikeColor('Crimson') 
+//       setLike()
+//     }else{
+//       setLikeColor('pink');
+//     }
+     
+//   }
+// }
+
+
+
 
   useEffect(() => {
     apiServices
@@ -95,7 +115,7 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {like == 0 ? `` : `${like} people like this`} </span>
+              <span className='Post-like-counter'> {like.length == 0 ? `` : `${like.length} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               <DeleteIcon onClick={handlePostDelete} htmlColor='gray' className='Post-buttom-icon ' />
