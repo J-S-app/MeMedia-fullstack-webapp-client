@@ -19,14 +19,14 @@ const CreatePost = ({ callBackFeeds }) => {
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
   const navigate = useNavigate();
 
-  console.log(user)
+
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const requestBody = { title }
-    console.log(title)
+  
 
     apiServices
       .createPostRoute(requestBody, header)

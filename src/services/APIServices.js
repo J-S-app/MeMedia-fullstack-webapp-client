@@ -69,8 +69,8 @@ class APIServices {
 
     //Comments methods
 
-    createCommentRoute = () => {
-        return this.api.post(`/posts/${postId}`)
+    createCommentRoute = (postId,requestBody,header) => {
+        return this.api.post(`/posts/${postId}`,requestBody, header)
     }
 
     removeCommentRoute = () => {

@@ -9,6 +9,10 @@ import { format } from 'timeago.js';
 import apiServices from '../../services/APIServices';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context'
+import InputEmoji from 'react-input-emoji';
+import Comment from './Comment'
+
+
 
 
 
@@ -21,6 +25,7 @@ const Post = ({ post, callBackFeeds }) => {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
 
+  const [title, setTitle] = useState('')
 
 
 
@@ -29,9 +34,9 @@ const Post = ({ post, callBackFeeds }) => {
   //add on click function for like functionality
 
 
-// useEffect(() => {
-//   alreadyLiked()
-// }, [])
+  // useEffect(() => {
+  //   alreadyLiked()
+  // }, [])
 
 
 
@@ -57,19 +62,15 @@ const Post = ({ post, callBackFeeds }) => {
   }
 
 
-//   const alreadyLiked = () => {
+  //   const alreadyLiked = () => {
 
-// if(user){
-//   if((post.postLikes).includes(user._id)){
-//    return setLikeColor('Crimson')
-//   }else{
-//       return setLikeColor('pink') 
-//   }
-// }
-
-
-
-
+  // if(user){
+  //   if((post.postLikes).includes(user._id)){
+  //    return setLikeColor('Crimson')
+  //   }else{
+  //       return setLikeColor('pink') 
+  //   }
+  // }
 
   // }
 
@@ -102,6 +103,35 @@ const Post = ({ post, callBackFeeds }) => {
 
 
   }
+
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault()
+
+    const requestBody = { title }
+
+
+    apiServices
+      .createCommentRoute(post._id, requestBody, header)
+      .then(response => {
+        console.log('response of comment', response)
+        callBackFeeds()
+        setTitle('')
+
+      })
+      .catch(e => {
+        console.log(header)
+        console.log('error creating comment', e)
+      })
+
+  }
+
+
+
+
+
+
+
 
 
 
@@ -138,6 +168,25 @@ const Post = ({ post, callBackFeeds }) => {
           <div className='Post-buttom-right'>
             <span className='Post-comment-counter'>{post?.postComments.length > 1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment`} </span>
           </div>
+          <div className='Post-buttom-comment'>
+            <div className='Post-buttom-comment-form'>
+              <form onSubmit={handleCommentSubmit}>
+                <InputEmoji
+                  name="title"
+                  value={title}
+                  placeholder='write a comment..'
+                  className='CreatePost-joke-title'
+                  onChange={setTitle}
+                />
+                <button>comment</button>
+              </form>
+
+            </div>
+            <div className='Post-buttom-comment-list'>
+              {post.postComments.map(comment=> <Comment key={comment._id} comment={comment} />).reverse()}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
