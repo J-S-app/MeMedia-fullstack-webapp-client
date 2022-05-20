@@ -3,22 +3,35 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import {format} from 'timeago.js';
+import apiServices from '../../services/APIServices';
 
 
-const Post = () => {
+const Post = ({post}) => {
   //add state for like functionality
   const [like, setLike] = useState(0)
+  const [postOwner, setpostOwner] = useState('')
   const [likeColor, setLikeColor] = useState('pink')
   const [isLiked, setIsLiked] = useState(false)
 
+  const storedToken = localStorage.getItem("authToken");
+  const header = { headers: { Authorization: `Bearer ${storedToken}` } }
   //add on click function for like functionality
   const likeHandler=()=>{
     setLike(preLike=> isLiked? preLike-1 : preLike+1);
     setIsLiked(!isLiked);
     isLiked? setLikeColor('pink') : setLikeColor('Crimson');
   }
+
+ useEffect(() => {
+  apiServices
+  .userDetailsRoute(post.postOwner,header)
+  .then(response=>setpostOwner(response.data))
+  .catch(e=>console.log('error getting user detail ',e))
+ }, [])
+ 
 
 
 
@@ -27,15 +40,16 @@ const Post = () => {
     <div className='Post' >
       <div className='Post-container'>
         <div className='Post-top'>
-          <img src={require("../../assets/profileImage/(10).jpg")} className='Post-profile-img' />
+          <img src={postOwner.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
           <div className='Post-title'>
-            <span className='Post-username'>XXX userName</span>
-            <span className='Post-date'>XXX hour ago</span>
+            <span className='Post-username'>{postOwner?.email}</span>
+            <span className='Post-date'>{format(post?.createdAt)}</span>
           </div>
         </div>
         <div className='Post-center'>
-          <span className='Post-post-content'>XXXX Post Text Goes Here</span>
-          <img src={require("../../assets/profileImage/(4).jpg")} className='Post-shared-img' />
+          <span className='Post-post-content'>{post?.title}</span>
+          {/* ///  Write condition to show POST CONTENT*/}
+          {/* <img src={require("../../assets/profileImage/(4).jpg")} className='Post-shared-img' /> */}
         </div>
         <div className='Post-buttom'>
           <div className='Post-buttom-left'>
