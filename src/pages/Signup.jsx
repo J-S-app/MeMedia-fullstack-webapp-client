@@ -1,15 +1,20 @@
-import { useState } from "react";
+import {useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiServices from '../services/APIServices'
+import { AuthContext } from "../context/auth.context"
 
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
+
+  const { storeToken, authenticateUser } = useContext(AuthContext);
+
+
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
@@ -19,14 +24,19 @@ function SignupPage(props) {
       .registerRoute(requestBody)
       .then((response) => {
         // login successful
+        
+        const jwt = response.data.authToken;
+        console.log('registration was sucessful. JWT token: ', jwt);
 
+        storeToken(jwt);
+        authenticateUser();
 
         navigate('/');
       })
       .catch((error) => {
         // login failed
-        const errorDescription = error.response.data;
-        console.log("error loggin in...", errorDescription)
+        const errorDescription = error.response.data.message;
+        console.log("registration error ...", errorDescription)
         setErrorMessage(errorDescription);
       })
 
