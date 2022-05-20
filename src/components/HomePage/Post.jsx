@@ -3,52 +3,72 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import {format} from 'timeago.js';
+import { format } from 'timeago.js';
 import apiServices from '../../services/APIServices';
+import { AuthContext } from '../../context/auth.context'
 
 
-const Post = ({post,callBackFeeds}) => {
+
+const Post = ({ post, callBackFeeds }) => {
   //add state for like functionality
   const [like, setLike] = useState(post.postLikes.length)
   const [postOwner, setpostOwner] = useState('')
   const [likeColor, setLikeColor] = useState('pink')
   const [isLiked, setIsLiked] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
+
+
+
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
   //add on click function for like functionality
-  const likeHandler=()=>{
-    setLike(preLike=> isLiked? preLike-1 : preLike+1);
+  const likeHandler = () => {
+    setLike(preLike => isLiked ? preLike - 1 : preLike + 1);
     setIsLiked(!isLiked);
-    isLiked? setLikeColor('pink') : setLikeColor('Crimson');
+    isLiked ? setLikeColor('pink') : setLikeColor('Crimson');
+
+    const postId = post._id
+
+    // apiServices
+    // .likesPostRoute(postId,header)
+    // .then(response=>console.log(response))
+    // .catch(error=>{
+    //   const errorDescription = error.response.data.errorMessage;
+    //  console.log("error like post ", errorDescription)
+    //  setErrorMessage(errorDescription);})
+
   }
 
- useEffect(() => {
-  apiServices
-  .userDetailsRoute(post.postOwner,header)
-  .then(response=>setpostOwner(response.data))
-  .catch(error=>{
-     const errorDescription = error.response.data.errorMessage;
-    console.log("error getting user detail", errorDescription)
-    setErrorMessage(errorDescription);})
- }, [])
+  useEffect(() => {
+    apiServices
+      .userDetailsRoute(post.postOwner, header)
+      .then(response => setpostOwner(response.data))
+      .catch(error => {
+        const errorDescription = error.response.data.errorMessage;
+        console.log("error getting user detail", errorDescription)
+        setErrorMessage(errorDescription);
+      })
+  }, [])
 
 
 
 
-const handlePostDelete=()=>{
-  apiServices
-  .deletePostRoute(post._id,header)
-  .then(response=>callBackFeeds())
-  .catch(error=>{  
-    const errorDescription = error.response.data.errorMessage;
-    console.log("error deleteing post ", errorDescription)
-    setErrorMessage(errorDescription);})
+  const handlePostDelete = () => {
+    apiServices
+      .deletePostRoute(post._id, header)
+      .then(response => callBackFeeds())
+      .catch(error => {
+        const errorDescription = error.response.data.errorMessage;
+        console.log("error deleteing post ", errorDescription)
+        setErrorMessage(errorDescription);
+      })
 
-    
-}
+
+  }
 
 
 
@@ -72,18 +92,18 @@ const handlePostDelete=()=>{
         </div>
         <div className='Post-buttom'>
           <div className='Post-buttom-left'>
-          <div className='Post-buttom-left-left-icon'>
-            <ModeCommentIcon htmlColor='CadetBlue' className='Post-buttom-icon' />
-            <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-            <span className='Post-like-counter'> {like ==0 ? `` : `${like} people like this`} </span>
+            <div className='Post-buttom-left-left-icon'>
+              <ModeCommentIcon htmlColor='CadetBlue' className='Post-buttom-icon' />
+              <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
+              <span className='Post-like-counter'> {like == 0 ? `` : `${like} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               <DeleteIcon onClick={handlePostDelete} htmlColor='gray' className='Post-buttom-icon ' />
-              <EditIcon htmlColor='gray' className='Post-buttom-icon' />
+              <NavLink to={`/editpost/${post?._id}`}><EditIcon htmlColor='gray' className='Post-buttom-icon' /></NavLink>
             </div>
           </div>
           <div className='Post-buttom-right'>
-            <span className='Post-comment-counter'>{post?.postComments.length >1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment` } </span>
+            <span className='Post-comment-counter'>{post?.postComments.length > 1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment`} </span>
           </div>
         </div>
       </div>

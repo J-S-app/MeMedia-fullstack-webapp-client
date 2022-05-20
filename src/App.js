@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import Navbar from "./components/Navbar/Navbar";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
+import EditPost from "./pages/EditPost";
 
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route  path='/auth/login' element={<LogIn />} />
           <Route  path='/auth/signup' element={<Signup />} />
           <Route  path='/profile' element={<ProfilePage />} />
+          <Route  path='/editpost/:postId' element={<EditPost/>} />
       </Routes>
     </div>
   );

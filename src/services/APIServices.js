@@ -51,16 +51,16 @@ class APIServices {
         return this.api.get('/posts',header)
     }
 
-    getOnePostRoute = () => {
-        return this.api.get(`/posts/${postId}`)
+    getOnePostRoute = (postId,header) => {
+        return this.api.get(`/posts/${postId}`,header)
     }
 
-    editOnePostRoute = () => {
-        return this.api.put(`/posts/${postId}/edit`)
+    editOnePostRoute = (postId,requestBody,header) => {
+        return this.api.put(`/posts/${postId}/edit`,requestBody,header)
     }
 
-    likesPostRoute = () => {
-        return this.api.put(`/posts/${postId}`)
+    likesPostRoute = (postId,header) => {
+        return this.api.put(`/posts/${postId}`,header)
     }
 
     deletePostRoute = (postId,header) => {

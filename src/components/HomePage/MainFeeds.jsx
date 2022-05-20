@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/auth.context"
 const MainFeeds = () => {
   const [posts, setPosts] = useState([]);
   const { isLoggedIn, isLoading, user } = useContext
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
 
   const storedToken = localStorage.getItem("authToken");
