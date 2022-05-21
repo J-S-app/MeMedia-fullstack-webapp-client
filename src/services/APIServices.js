@@ -37,8 +37,8 @@ class APIServices {
         return this.api.get(`/users/${userId}/followers`)
     }
 
-    getFollowingsRoute = () => {
-        return this.api.get(`/users/${userId}/followings`)
+    getFollowingsRoute = (userId, header) => {
+        return this.api.get(`/users/${userId}/followings`,header)
     }
 
     // Posts methods

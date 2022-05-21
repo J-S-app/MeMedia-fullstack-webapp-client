@@ -18,7 +18,7 @@ const MainFeeds = () => {
     .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
     .then(response => setPosts(response.data.reverse()))
     .catch(error => {
-      const errorDescription = error.response.data.errorMessage;
+      const errorDescription = error.response.data.message;
       console.log("error getting all posts", errorDescription)
       setErrorMessage(errorDescription);
     })
