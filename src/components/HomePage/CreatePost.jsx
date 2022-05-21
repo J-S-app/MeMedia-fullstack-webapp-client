@@ -81,7 +81,7 @@ const CreatePost = ({ callBackFeeds }) => {
           <InputEmoji
             name="text"
             value={title}
-            placeholder='Post new joke'
+            placeholder={`post new joke ${userdet.username} ..`}
             className='CreatePost-joke-title'
             onChange={setTitle}
           />
