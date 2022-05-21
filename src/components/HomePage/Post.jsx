@@ -20,6 +20,7 @@ const Post = ({ post, callBackFeeds }) => {
   //add state for like functionality
   const [postOwner, setpostOwner] = useState('')
   const [likeColor, setLikeColor] = useState('')
+  const [showComment, setShowComment] = useState(false)
   const [errorMessage, setErrorMessage] = useState(undefined);
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
 
@@ -37,11 +38,11 @@ const Post = ({ post, callBackFeeds }) => {
   }, [post])
 
   const likeUnlike = () => {
-      if (post.postLikes.includes(user._id)) {
-        return setLikeColor('crimson')
-      } else {
-        return setLikeColor('pink')
-      }
+    if (post.postLikes.includes(user._id)) {
+      return setLikeColor('crimson')
+    } else {
+      return setLikeColor('pink')
+    }
   };
 
 
@@ -115,6 +116,13 @@ const Post = ({ post, callBackFeeds }) => {
   }
 
 
+const showCommentBar=()=>{
+  return setShowComment(!showComment)
+}
+
+
+
+
   return (
     <div className='Post' >
       <div className='Post-container'>
@@ -136,18 +144,27 @@ const Post = ({ post, callBackFeeds }) => {
         <div className='Post-buttom'>
           <div className='Post-buttom-left'>
             <div className='Post-buttom-left-left-icon'>
-              <ModeCommentIcon htmlColor='CadetBlue' className='Post-buttom-icon' />
+              <ModeCommentIcon onClick={showCommentBar} htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
               <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes.length} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
-              <DeleteIcon onClick={handlePostDelete} htmlColor='gray' className='Post-buttom-icon ' />
-              <NavLink to={`/editpost/${post?._id}`}><EditIcon htmlColor='gray' className='Post-buttom-icon' /></NavLink>
+              {user?._id == postOwner?._id
+                ?
+                <>
+                  <DeleteIcon onClick={handlePostDelete} htmlColor='gray' className='Post-buttom-icon ' />
+                  <NavLink to={`/editpost/${post?._id}`}><EditIcon htmlColor='gray' className='Post-buttom-icon' /></NavLink>
+                </>
+                :
+                ""
+              }
             </div>
           </div>
           <div className='Post-buttom-right'>
             <span className='Post-comment-counter'>{post?.postComments.length > 1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment`} </span>
           </div>
+          {showComment 
+          &&
           <div className='Post-buttom-comment'>
             <div className='Post-buttom-comment-form'>
               <form onSubmit={handleCommentSubmit}>
@@ -166,6 +183,8 @@ const Post = ({ post, callBackFeeds }) => {
               {post.postComments.map(comment => <Comment callBackFeeds={callBackFeeds} key={comment._id} comment={comment} />).reverse()}
             </div>
           </div>
+          }
+          
 
         </div>
       </div>
