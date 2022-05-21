@@ -18,10 +18,8 @@ import Comment from './Comment'
 
 const Post = ({ post, callBackFeeds }) => {
   //add state for like functionality
-  const [like, setLike] = useState(post.postLikes)
   const [postOwner, setpostOwner] = useState('')
-  const [likeColor, setLikeColor] = useState('pink')
-  const [isLiked, setIsLiked] = useState(false)
+  const [likeColor, setLikeColor] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined);
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
 
@@ -34,16 +32,22 @@ const Post = ({ post, callBackFeeds }) => {
   //add on click function for like functionality
 
 
-  // useEffect(() => {
-  //   alreadyLiked()
-  // }, [])
+  useEffect(() => {
+    likeUnlike()
+  }, [post])
+
+  const likeUnlike = () => {
+      if (post.postLikes.includes(user._id)) {
+        return setLikeColor('crimson')
+      } else {
+        return setLikeColor('pink')
+      }
+  };
 
 
 
 
   const likeHandler = () => {
-    // alreadyLiked()
-
 
     const postId = post._id
 
@@ -51,7 +55,6 @@ const Post = ({ post, callBackFeeds }) => {
       .likesPostRoute(postId, header, header)
       .then(response => {
         callBackFeeds()
-        // setLike(preLike => preLike.includes(user._id) ? setLikeColor('Crimson') : setLikeColor('pink') )
       })
       .catch(error => {
         const errorDescription = error.response.data.errorMessage;
@@ -60,21 +63,6 @@ const Post = ({ post, callBackFeeds }) => {
       })
 
   }
-
-
-  //   const alreadyLiked = () => {
-
-  // if(user){
-  //   if((post.postLikes).includes(user._id)){
-  //    return setLikeColor('Crimson')
-  //   }else{
-  //       return setLikeColor('pink') 
-  //   }
-  // }
-
-  // }
-
-
 
 
   useEffect(() => {
@@ -125,17 +113,6 @@ const Post = ({ post, callBackFeeds }) => {
       })
 
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
   return (
