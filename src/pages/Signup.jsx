@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context"
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -19,7 +20,7 @@ function SignupPage(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { email, password };
+    const requestBody = { email, password ,username};
     apiServices
       .registerRoute(requestBody)
       .then((response) => {
@@ -50,6 +51,14 @@ function SignupPage(props) {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <form onSubmit={handleSignupSubmit}>
+      <label>User Name:</label>
+      <input
+          type="text"
+          name="username"
+          value={username}
+          required={true}
+          onChange={(e) => setUsername(e.target.value)}
+        />
         <label>Email:</label>
         <input
           type="email"
