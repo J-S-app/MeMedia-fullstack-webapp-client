@@ -39,9 +39,9 @@ const SideBarLeft = () => {
   return (
     <div className="SideBar-left">
       <div className="SideBar-left-title">
-        <h4>Friends </h4>
+        <h4>Followings </h4>
         {followingsList.length > 0 &&
-          <NavLink to={`/${user?._id}/folowings`}>See All</NavLink>
+          <NavLink to={`/${user?._id}/followings`}>See All</NavLink>
         }
 
       </div>

@@ -48,7 +48,7 @@ const ProfileLeftBar = ({ userId }) => {
   }, [user?._id, userId])
 
 
-  const GetFridendList = () => {
+  const GetFollowingsList = () => {
     const result = followingsList.map((following, index) => {
       if (index < 8) {
         return (
@@ -74,7 +74,7 @@ const ProfileLeftBar = ({ userId }) => {
   return (
     <div className="ProfileLeftBar-container">
       <div className="ProfileLeftBar-title">
-        <h4>Friends </h4>
+        <h4>Followings </h4>
         <div>
           {followingsList.length > 0
             ?
@@ -82,13 +82,13 @@ const ProfileLeftBar = ({ userId }) => {
               <div>
                 {userId == user?._id
                   ?
-                  <NavLink to={`/${user?._id}/folowings`}>See All</NavLink>
+                  <NavLink to={`/${user?._id}/followings`}>See All</NavLink>
                   :
-                  <NavLink to={`/${userId}/folowings`}>See All</NavLink>
+                  <NavLink to={`/${userId}/followings`}>See All</NavLink>
                 }
               </div>
               <div>
-                {GetFridendList()}
+                {GetFollowingsList()}
               </div>
 
             </>
