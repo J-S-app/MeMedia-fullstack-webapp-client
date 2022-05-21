@@ -45,13 +45,13 @@ const ProfilePage = () => {
 
 
 
-
+const birthdayDate = String(userDetail.birthday).substring(0,10)
 
 
 
 
   return (
-    <div className="ProfilePage-container ">
+    <div className="ProfilePage-container">
       <div className='ProfilePage-left'>
         <ProfileLeftBar userId={userId} />
       </div>
@@ -77,9 +77,16 @@ const ProfilePage = () => {
             }
           </>
         </div>
-        <div className='ProfilePage-right-bottom'>
-          <ProfileFeeds userId={userId} />
-
+        <div className='ProfilePage-right-userDetail'>
+          <div className='ProfilePage-right-ProfileFeeds'>
+            <ProfileFeeds userId={userId} />
+          </div>
+          <div className='ProfilePage-right-bottom-right'>
+            <h5>{birthdayDate == 'undefined' ? '' : birthdayDate}</h5>
+            <p>{userDetail.country}</p>
+            <h5>About Meme :</h5>
+            <p>{userDetail.aboutMeme}</p>
+          </div>
         </div>
       </div>
 

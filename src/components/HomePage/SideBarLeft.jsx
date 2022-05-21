@@ -22,7 +22,7 @@ const SideBarLeft = () => {
         .getFollowingsRoute(user._id, header)
         .then(followingList => {
           setFollowingsList(followingList.data)
-      })
+        })
         .catch(error => {
           const errorDescription = error.response.data.message;
           console.log("error getting all followings", errorDescription)
@@ -40,7 +40,10 @@ const SideBarLeft = () => {
     <div className="SideBar-left">
       <div className="SideBar-left-title">
         <h4>Friends </h4>
-        <NavLink to={`/${user?._id}/folowings`}>See All</NavLink>
+        {followingsList.length > 0 &&
+          <NavLink to={`/${user?._id}/folowings`}>See All</NavLink>
+        }
+
       </div>
 
 

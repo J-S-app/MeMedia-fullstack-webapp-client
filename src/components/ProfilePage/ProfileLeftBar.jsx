@@ -1,4 +1,4 @@
-import "../HomePage/SideBarLeft.css"
+import "./ProfileLeftBar.css"
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"
 import apiServices from '../../services/APIServices';
@@ -53,10 +53,10 @@ const ProfileLeftBar = ({ userId }) => {
       if (index < 8) {
         return (
           <>
-            <div key={following._id} className="SideBar-left-fallowers-list">
-              <img src={following.profileImage || require("../../assets/placeholder.png")} className="SideBar-left-fallowers-image" />
+            <div key={following._id} className="ProfileLeftBar-fallowers-list">
+              <img src={following.profileImage || require("../../assets/placeholder.png")} className="ProfileLeftBar-fallowers-image" />
               <NavLink to={`/profile/${following._id}`}>
-                <h5 className="SideBar-left-followers-name">{following.email}</h5>
+                <h5 className="ProfileLeftBar-followers-name">{following.email}</h5>
               </NavLink>
             </div>
           </>
@@ -72,8 +72,8 @@ const ProfileLeftBar = ({ userId }) => {
 
 
   return (
-    <div className="SideBar-left">
-      <div className="SideBar-left-title">
+    <div className="ProfileLeftBar-container">
+      <div className="ProfileLeftBar-title">
         <h4>Friends </h4>
         <div>
           {followingsList.length > 0
