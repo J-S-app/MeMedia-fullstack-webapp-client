@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const { userId } = useParams()
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [userDetail, setUserDetail] = useState({});
 
 
 
@@ -29,6 +30,22 @@ const ProfilePage = () => {
       })
   }
 
+useEffect(() => {
+  apiServices
+  .userDetailsRoute(userId,header)
+  .then(response=> setUserDetail(response.data) )
+  .catch(error => {
+    const errorDescription = error.response.data.message;
+    console.log("error  getting user detail", errorDescription)
+    setErrorMessage(errorDescription);
+  })
+
+}, [])
+
+
+
+
+
 
 
 
@@ -42,11 +59,11 @@ const ProfilePage = () => {
         <div className='ProfilePage-right-top'>
 
           <div className='ProfilePage-right-top-images'>
-            <img src={require('../assets/coverImage/2.jpg')} className="ProfilePage-right-top-coverimage" />
-            <img src={require('../assets/profileImage/(1).jpg')} className="ProfilePage-right-top-profileimage" />
+            <img src={userDetail.coverImage || require("../assets/coverimage-placeholder.jpg")} className="ProfilePage-right-top-coverimage" />
+            <img src={userDetail.profileImage || require("../assets/placeholder.png")} className="ProfilePage-right-top-profileimage" />
             <div className='ProfilePage-right-top-userinfo'>
-              <h3 className="ProfilePage-right-top-username">XXX User Name</h3>
-              <span className="ProfilePage-right-top-catchphrase">XXX CatchPhrase goes here</span>
+              <h3 className="ProfilePage-right-top-username">{userDetail.email}</h3>
+              <span className="ProfilePage-right-top-catchphrase">{userDetail.catchPhrase}</span>
 
             </div>
           </div>
