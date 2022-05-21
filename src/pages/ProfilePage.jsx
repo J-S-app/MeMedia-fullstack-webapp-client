@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from "../context/auth.context"
 import apiServices from '../services/APIServices';
 import { useState, useEffect, useContext } from "react";
+import { NavLink } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { userId } = useParams()
@@ -30,17 +31,17 @@ const ProfilePage = () => {
       })
   }
 
-useEffect(() => {
-  apiServices
-  .userDetailsRoute(userId,header)
-  .then(response=> setUserDetail(response.data) )
-  .catch(error => {
-    const errorDescription = error.response.data.message;
-    console.log("error  getting user detail", errorDescription)
-    setErrorMessage(errorDescription);
-  })
+  useEffect(() => {
+    apiServices
+      .userDetailsRoute(userId, header)
+      .then(response => setUserDetail(response.data))
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log("error  getting user detail", errorDescription)
+        setErrorMessage(errorDescription);
+      })
 
-}, [])
+  }, [])
 
 
 
@@ -67,13 +68,14 @@ useEffect(() => {
 
             </div>
           </div>
-          {user?._id != userId
-            ?
-            <button onClick={handleFollow}>Follow</button>
-            :
-            ''
-          }
-
+          <>
+            {user?._id != userId
+              ?
+              <button onClick={handleFollow}>Follow</button>
+              :
+              <NavLink to={`/profile/${userId}/setting`}> Edit Profile </NavLink>
+            }
+          </>
         </div>
         <div className='ProfilePage-right-bottom'>
           <ProfileFeeds userId={userId} />

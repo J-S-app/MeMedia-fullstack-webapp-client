@@ -8,6 +8,7 @@ import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import EditPost from "./pages/EditPost";
 import FollowingList from "./pages/FollowingList";
+import ProfileSetting from "./pages/ProfileSetting";
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route  path='/auth/login' element={<LogIn />} />
           <Route  path='/auth/signup' element={<Signup />} />
           <Route  path='/profile/:userId' element={<ProfilePage />} />
+          <Route  path='/profile/:userId/setting' element={<ProfileSetting />} />
           <Route  path='/editpost/:postId' element={<EditPost/>} />
           <Route  path='/:userId/folowings' element={<FollowingList />} />
 

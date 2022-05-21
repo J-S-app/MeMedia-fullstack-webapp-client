@@ -25,8 +25,8 @@ class APIServices {
         return this.api.get(`/users/${userId}`,header)
     }
 
-    updateUserRoute = () => {
-        return this.api.put(`/users/${userId}`)
+    updateUserRoute = (userId,requestBody,header) => {
+        return this.api.put(`/users/${userId}`,requestBody,header)
     }
 
     followUserRoute = (userId,headers,header) => {
