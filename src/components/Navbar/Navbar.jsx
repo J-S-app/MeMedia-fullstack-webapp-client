@@ -10,7 +10,7 @@ const Navbar = () => {
     <div className="Navbar-container">
       <div className="Navbar-left">
         <NavLink to='/' className="Navbar-logo">
-          J&S
+          MeMedia
         </NavLink>
         <input className ='Navbar-search-bar' placeholder='search for posts' type='search'/>
       </div>

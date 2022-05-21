@@ -43,6 +43,7 @@ const SideBarLeft = () => {
         <NavLink to={`/${user?._id}/folowings`}>See All</NavLink>
       </div>
 
+
       {followingsList.length > 0
         ?
         followingsList.map((following, index) => {
