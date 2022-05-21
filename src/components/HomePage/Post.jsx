@@ -130,7 +130,7 @@ const showCommentBar=()=>{
           <img src={postOwner.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
           <div className='Post-title'>
             <NavLink to={`/profile/${postOwner?._id}`}>
-              <span className='Post-username'>{postOwner?.email}</span>
+              <span className='Post-username'>{postOwner?.username}</span>
             </NavLink>
 
             <span className='Post-date'>{format(post?.createdAt)}</span>

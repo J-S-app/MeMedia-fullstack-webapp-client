@@ -74,7 +74,7 @@ const CreatePost = ({ callBackFeeds }) => {
           <div className='CreatePost-profile-title'>
             <img src={userdet.profileImage || require("../../assets/placeholder.png")} className='CreatePost-profile-img' />
             <NavLink to={`/profile/${userdet._id}`}>
-            <h6>{userdet.email} </h6>
+            <h5>{userdet.username} </h5>
             </NavLink>
             
           </div>

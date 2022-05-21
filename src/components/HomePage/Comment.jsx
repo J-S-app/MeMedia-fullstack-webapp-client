@@ -63,7 +63,7 @@ const handleLike=()=>{
       <div className='Comment-title-and-owner'>
         <img src={commentOwner.profileImage || require("../../assets/placeholder.png")} className='Comment-profile-img' />
         <NavLink to={`/profile/${commentOwner._id}`}>
-        <span>{commentOwner.email}</span>
+        <span>{commentOwner.username}</span>
         </NavLink>
         <p className='Comment-title'>{comment.title}</p>
         <FavoriteIcon htmlColor={likeColor} onClick={handleLike} className='Comment-title-like-icon'  />

@@ -63,7 +63,7 @@ const birthdayDate = String(userDetail.birthday).substring(0,10)
             <img src={userDetail.coverImage || require("../assets/coverimage-placeholder.jpg")} className="ProfilePage-right-top-coverimage" />
             <img src={userDetail.profileImage || require("../assets/placeholder.png")} className="ProfilePage-right-top-profileimage" />
             <div className='ProfilePage-right-top-userinfo'>
-              <h3 className="ProfilePage-right-top-username">{userDetail.email}</h3>
+              <h3 className="ProfilePage-right-top-username">{userDetail.username}</h3>
               <span className="ProfilePage-right-top-catchphrase">{userDetail.catchPhrase}</span>
 
             </div>

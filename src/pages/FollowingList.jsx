@@ -61,7 +61,7 @@ const FollowingList = () => {
               <div key={following._id} className="FollowingList-fallowers-list">
                 <img src={following.profileImage || require("../assets/placeholder.png")} className="FollowingList-fallowers-image" />
                 <NavLink to={`/profile/${following._id}`}>
-                <h5 className="FollowingList-followers-name">{following.email}</h5>
+                <h5 className="FollowingList-followers-name">{following.username}</h5>
                 </NavLink>
                 <span className="FollowingList-catchPhrase" >{following.catchPhrase}</span>
               </div>
