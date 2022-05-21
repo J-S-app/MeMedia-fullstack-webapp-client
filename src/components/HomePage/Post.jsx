@@ -144,7 +144,10 @@ const Post = ({ post, callBackFeeds }) => {
         <div className='Post-top'>
           <img src={postOwner.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
           <div className='Post-title'>
-            <span className='Post-username'>{postOwner?.email}</span>
+            <NavLink to={`/profile/${postOwner?._id}`}>
+              <span className='Post-username'>{postOwner?.email}</span>
+            </NavLink>
+
             <span className='Post-date'>{format(post?.createdAt)}</span>
           </div>
         </div>
@@ -183,7 +186,7 @@ const Post = ({ post, callBackFeeds }) => {
 
             </div>
             <div className='Post-buttom-comment-list'>
-              {post.postComments.map(comment=> <Comment callBackFeeds={callBackFeeds} key={comment._id} comment={comment} />).reverse()}
+              {post.postComments.map(comment => <Comment callBackFeeds={callBackFeeds} key={comment._id} comment={comment} />).reverse()}
             </div>
           </div>
 

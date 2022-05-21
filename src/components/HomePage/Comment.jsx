@@ -2,6 +2,8 @@ import './Comment.css'
 import { useState, useEffect } from 'react';
 import apiServices from '../../services/APIServices';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import { NavLink } from 'react-router-dom';
+
 
 const Comment = ({ comment ,callBackFeeds }) => {
   const [commentOwner, setCommentOwner] = useState('')
@@ -42,7 +44,9 @@ const handleLike=()=>{
       <hr />
       <div className='Comment-title-and-owner'>
         <img src={commentOwner.profileImage || require("../../assets/placeholder.png")} className='Comment-profile-img' />
+        <NavLink to={`/profile/${commentOwner._id}`}>
         <span>{commentOwner.email}</span>
+        </NavLink>
         <p className='Comment-title'>{comment.title}</p>
         <ThumbUpAltOutlinedIcon className='Comment-title-like-icon'  onClick={handleLike} />
         <span>{comment.commentLikes.length == 0 ? `` : `${comment.commentLikes.length} people like this`}</span>

@@ -6,7 +6,7 @@ import apiServices from '../../services/APIServices';
 import LinkTwoToneIcon from '@mui/icons-material/LinkTwoTone';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context'
-
+import { NavLink } from 'react-router-dom';
 
 
 const CreatePost = ({ callBackFeeds }) => {
@@ -73,7 +73,10 @@ const CreatePost = ({ callBackFeeds }) => {
         <div className='CreatePost-top'>
           <div className='CreatePost-profile-title'>
             <img src={userdet.profileImage || require("../../assets/placeholder.png")} className='CreatePost-profile-img' />
+            <NavLink to={`/profile/${userdet._id}`}>
             <h6>{userdet.email} </h6>
+            </NavLink>
+            
           </div>
           <InputEmoji
             name="text"
