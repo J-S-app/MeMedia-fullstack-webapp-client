@@ -1,0 +1,52 @@
+.ProfileLeftBar-container{
+  flex: 3;
+  height: calc(100vh - 50px); 
+  margin-left: 15px;
+  overflow-y: scroll ;
+  position: sticky;
+  top: 50px;
+}
+
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-track{
+  background-color: rgb(237, 237, 237);
+}
+::-webkit-scrollbar-thumb{
+  background-color: #c7c7c7; 
+}
+
+
+.ProfileLeftBar-container a{
+text-decoration: none;
+color: #132743; 
+font-weight: 600;
+font-size: 14px;
+}
+.ProfileLeftBar-container a:hover{
+  color: #407088; 
+}
+
+.ProfileLeftBar-fallowers-list{
+  display: flex;
+  align-items: center;
+}
+
+.ProfileLeftBar-fallowers-image{
+  margin-right: 10px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ProfileLeftBar-title{
+  display: flex;
+  align-items: center;
+  
+}
+
+.ProfileLeftBar-title h4{
+  margin-right: 55 px;
+}

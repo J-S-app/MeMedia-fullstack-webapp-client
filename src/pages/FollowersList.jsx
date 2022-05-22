@@ -1,69 +1,68 @@
-import './FollowingList.css';
+import './FollowersList.css';
 import apiServices from '../services/APIServices';
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 import { NavLink } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
+const FollowersList = () => {
 
-const FollowingList = () => {
-
-  const [followingsList, setFollowingsList] = useState([])
+  const [followersList, setFollowerssList] = useState([])
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const {userId} = useParams()
 
-
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
 
-  const callBackFollowingList = () => {
+
+  const callBackFollowersList = () => {
     if (user && userId == user?._id) {
       apiServices
-        .getFollowingsRoute(user._id, header)
-        .then(followingList => {
-          setFollowingsList(followingList.data)
+        .getFollowersRoute(user._id, header)
+        .then(response => {
+          setFollowerssList(response.data)
         })
         .catch(error => {
           const errorDescription = error.response.data.message;
-          console.log("error getting all followings", errorDescription)
+          console.log("error getting all followers", errorDescription)
           setErrorMessage(errorDescription);
         })
 
     }if (user && userId != user?._id) {
       apiServices
-        .getFollowingsRoute(userId, header)
-        .then(followingList => {
-          setFollowingsList(followingList.data)
+        .getFollowersRoute(userId, header)
+        .then(response => {
+          setFollowerssList(response.data)
         })
         .catch(error => {
           const errorDescription = error.response.data.message;
-          console.log("error getting all followings", errorDescription)
+          console.log("error getting all followers", errorDescription)
           setErrorMessage(errorDescription);
         })
       }
   }
   useEffect(() => {
-    callBackFollowingList()
+    callBackFollowersList()
   }, [])
 
 
 
 
   return (
-    <div className='FollowingList-container'>
-      {followingsList.length > 0
+    <div className='FollowersList-container'>
+      {followersList.length > 0
         ?
-        followingsList.map((following) => {
+        followersList.map((follower) => {
 
           return (
             <>
-              <div key={following._id} className="FollowingList-fallowers-list">
-                <img src={following.profileImage || require("../assets/placeholder.png")} className="FollowingList-fallowers-image" />
-                <NavLink to={`/profile/${following._id}`}>
-                <h5 className="FollowingList-followers-name">{following.username}</h5>
+              <div key={follower._id} className="FollowersList-fallowers-list">
+                <img src={follower.profileImage || require("../assets/placeholder.png")} className="FollowersList-fallowers-image" />
+                <NavLink to={`/profile/${follower._id}`}>
+                <h5 className="FollowersList-followers-name">{follower.username}</h5>
                 </NavLink>
-                <span className="FollowingList-catchPhrase" >{following.catchPhrase}</span>
+                <span className="FollowersList-catchPhrase" >{follower.catchPhrase}</span>
               </div>
             </>
           )
@@ -76,4 +75,4 @@ const FollowingList = () => {
   )
 }
 
-export default FollowingList
+export default FollowersList;

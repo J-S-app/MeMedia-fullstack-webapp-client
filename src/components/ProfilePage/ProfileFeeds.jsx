@@ -1,11 +1,13 @@
-import './MainFeeds.css'
-import CreatePost from './CreatePost'
-import Post from './Post'
+import './ProfileFeeds.css'
+import CreatePost from '../HomePage/CreatePost'
+import Post from '../HomePage/Post'
 import apiServices from '../../services/APIServices';
 import { useState, useEffect, useContext } from "react";
-import { AuthContext } from '../../context/auth.context'
+import { AuthContext } from '../../context/auth.context';
 
-const MainFeeds = () => {
+
+
+const ProfileFeeds = ({userId}) => {
   const [posts, setPosts] = useState([]);
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -33,12 +35,20 @@ const MainFeeds = () => {
 
   return (
     <>
-      <div className='Main-feeds'>
-        <CreatePost callBackFeeds={callBackFeeds} />
+      <div className='ProfileFeeds'>
+      {user?._id == userId
+      ?
+      <CreatePost callBackFeeds={callBackFeeds} />
+      
+      :
+      ''
+      } 
         {posts.length > 0
           ?
           <>
-            {posts.map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+            {posts
+            .filter(post=> post.postOwner == userId)
+            .map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
           </>
           : ''
         }
@@ -48,4 +58,4 @@ const MainFeeds = () => {
   )
 }
 
-export default MainFeeds
+export default ProfileFeeds

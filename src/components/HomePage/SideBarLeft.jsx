@@ -22,7 +22,7 @@ const SideBarLeft = () => {
         .getFollowingsRoute(user._id, header)
         .then(followingList => {
           setFollowingsList(followingList.data)
-      })
+        })
         .catch(error => {
           const errorDescription = error.response.data.message;
           console.log("error getting all followings", errorDescription)
@@ -39,9 +39,13 @@ const SideBarLeft = () => {
   return (
     <div className="SideBar-left">
       <div className="SideBar-left-title">
-        <h4>Friends </h4>
-        <NavLink to={`/${user?._id}/folowings`}>See All</NavLink>
+        <h4>Followings </h4>
+        {followingsList.length > 0 &&
+          <NavLink to={`/${user?._id}/followings`}>See All</NavLink>
+        }
+
       </div>
+
 
       {followingsList.length > 0
         ?
@@ -52,7 +56,7 @@ const SideBarLeft = () => {
                 <div key={following._id} className="SideBar-left-fallowers-list">
                   <img src={following.profileImage || require("../../assets/placeholder.png")} className="SideBar-left-fallowers-image" />
                   <NavLink to={`/profile/${following._id}`}>
-                    <h5 className="SideBar-left-followers-name">{following.email}</h5>
+                    <h5 className="SideBar-left-followers-name">{following.username}</h5>
                   </NavLink>
                 </div>
               </>

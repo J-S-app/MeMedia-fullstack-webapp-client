@@ -25,16 +25,16 @@ class APIServices {
         return this.api.get(`/users/${userId}`,header)
     }
 
-    updateUserRoute = () => {
-        return this.api.put(`/users/${userId}`)
+    updateUserRoute = (userId,requestBody,header) => {
+        return this.api.put(`/users/${userId}`,requestBody,header)
     }
 
-    followUserRoute = () => {
-        return this.api.put(`/users/${userId}/follow`)
+    followUserRoute = (userId,headers,header) => {
+        return this.api.put(`/users/${userId}/follow`,headers,header)
     }
 
-    getFollowersRoute = () => {
-        return this.api.get(`/users/${userId}/followers`)
+    getFollowersRoute = (userId, header) => {
+        return this.api.get(`/users/${userId}/followers`,header)
     }
 
     getFollowingsRoute = (userId, header) => {

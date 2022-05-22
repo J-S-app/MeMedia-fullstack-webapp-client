@@ -9,6 +9,7 @@
 
 .ProfilePage-right-bottom{
 display: flex;
+
 }
 
 .ProfilePage-right-top-images{
@@ -20,6 +21,7 @@ display: flex;
   width: 100%;
   height: 270px;
   object-fit: cover;
+  background-color: rgb(154, 154, 154);
 }
 
 .ProfilePage-right-top-profileimage{
@@ -51,4 +53,22 @@ display: flex;
 .ProfilePage-right-top-catchphrase{
 width: 80%;
 text-align: start;
+}
+
+.ProfilePage-right-userDetail{
+  display: flex;
+}
+
+
+.ProfilePage-right-bottom-right{
+  flex:3;
+}
+
+
+.ProfilePage-left{
+  flex:3;
+}
+
+.ProfilePage-right-ProfileFeeds{
+  flex:6;
 }
