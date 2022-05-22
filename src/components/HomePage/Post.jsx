@@ -132,6 +132,15 @@ const Post = ({ post, callBackFeeds }) => {
           <span className='Post-post-content'>{post?.title}</span>
           {/* ///  Write condition to show POST CONTENT*/}
           {/* <img src={require("../../assets/profileImage/(4).jpg")} className='Post-shared-img' /> */}
+          {post?.postContent && (
+            <div className='Post-post-content'>
+                <img
+                    src={post.postContent}
+                    alt="chosen"
+                    style={{ maxHeight: '300px' }}
+                />
+            </div>
+            )}
         </div>
         <div className='Post-buttom'>
           <div className='Post-buttom-left'>
