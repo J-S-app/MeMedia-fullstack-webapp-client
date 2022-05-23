@@ -25,8 +25,7 @@ const Post = ({ post, callBackFeeds }) => {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
 
   const [title, setTitle] = useState('')
-
-
+  const [commentContentCD, setCommentContentCD] = useState('')
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
@@ -44,8 +43,6 @@ const Post = ({ post, callBackFeeds }) => {
       return setLikeColor('pink')
     }
   };
-
-
 
 
   const likeHandler = () => {
@@ -78,8 +75,6 @@ const Post = ({ post, callBackFeeds }) => {
   }, [])
 
 
-
-
   const handlePostDelete = () => {
     apiServices
       .deletePostRoute(post._id, header)
@@ -96,16 +91,17 @@ const Post = ({ post, callBackFeeds }) => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault()
-
-    const requestBody = { title }
-
+    const requestBody = {
+      title,
+      commentContent: commentContentCD
+    }
 
     apiServices
       .createCommentRoute(post._id, requestBody, header)
       .then(response => {
-        console.log('response of comment', response)
         callBackFeeds()
         setTitle('')
+        setCommentContentCD('')
 
       })
       .catch(e => {
@@ -116,12 +112,64 @@ const Post = ({ post, callBackFeeds }) => {
   }
 
 
-const showCommentBar=()=>{
-  return setShowComment(!showComment)
-}
+  const showCommentBar = () => {
+    return setShowComment(!showComment)
+  }
 
+  function showUploadWidget(e) {
+    e.preventDefault()
+    cloudinary.openUploadWidget({
+      cloudName: "memediacloud",
+      uploadPreset: "rgly7uw1",
+      sources: ["local", "url", "camera", "image_search", "facebook", "dropbox", "instagram", "getty", "istock"],
+      googleApiKey: "AIzaSyCOms5CX5Je-Yk92vxex2uWopweDa3Q6Kg",
+      showAdvancedOptions: true,
+      cropping: true,
+      multiple: false,
+      // folder: "user_images", 
+      tags: ["meme", "lol", "memes"],
+      // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+      // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+      // theme: "purple", //change to a purple theme
+      defaultSource: "local",
+      styles: {
+        palette: {
+          window: "#FFFFFF",
+          windowBorder: "#90A0B3",
+          tabIcon: "#0078FF",
+          menuIcons: "#5A616A",
+          textDark: "#000000",
+          textLight: "#FFFFFF",
+          link: "#0078FF",
+          action: "#FF620C",
+          inactiveTabIcon: "#0E2F5A",
+          error: "#F44235",
+          inProgress: "#0078FF",
+          complete: "#20B832",
+          sourceBg: "#E4EBF1"
+        },
+        fonts: {
+          default: null,
+          "'Fira Sans', sans-serif": {
+            url: "https://fonts.googleapis.com/css?family=Fira+Sans",
+            active: true
+          }
+        }
+      }
+    }, (err, result) => {
+      if (!err && result && result.event === "success") {
+        // console.log("Upload Widget event - ", info);
+        // console.log(result.info.secure_url)
+        setCommentContentCD(result.info.secure_url)
 
+      }
+    });
+  }
 
+  const handleDiscard = (e) => {
+    e.preventDefault()
+    setCommentContentCD('')
+  }
 
   return (
     <div className='Post' >
@@ -142,13 +190,13 @@ const showCommentBar=()=>{
           {/* <img src={require("../../assets/profileImage/(4).jpg")} className='Post-shared-img' /> */}
           {post?.postContent && (
             <div className='Post-post-content'>
-                <img
-                    src={post.postContent}
-                    alt="chosen"
-                    style={{ maxHeight: '300px' }}
-                />
+              <img
+                src={post.postContent}
+                alt="chosen"
+                style={{ maxHeight: '300px' }}
+              />
             </div>
-            )}
+          )}
         </div>
         <div className='Post-buttom'>
           <div className='Post-buttom-left'>
@@ -172,28 +220,54 @@ const showCommentBar=()=>{
           <div className='Post-buttom-right'>
             <span className='Post-comment-counter'>{post?.postComments.length > 1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment`} </span>
           </div>
-          {showComment 
-          &&
-          <div className='Post-buttom-comment'>
-            <div className='Post-buttom-comment-form'>
-              <form onSubmit={handleCommentSubmit}>
-                <InputEmoji
-                  name="title"
-                  value={title}
-                  placeholder='write a comment..'
-                  className='CreatePost-joke-title'
-                  onChange={setTitle}
-                />
-                <button>comment</button>
-              </form>
+          {showComment
+            &&
+            <div className='Post-buttom-comment'>
+              <div className='Post-buttom-comment-form'>
+                <form onSubmit={handleCommentSubmit}>
+                  <InputEmoji
+                    name="text"
+                    value={title}
+                    placeholder='write a comment..'
+                    className='CreatePost-joke-title'
+                    onChange={setTitle}
+                  />
+                  <div className='CreatePost-buttom-preload'>
+                    {commentContentCD && (
+                      < >
+                        <img
+                          src={commentContentCD}
+                          alt="chosen"
+                          style={{ maxHeight: '50px' }}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <div className='CreatePost-buttom'>
+                    <div className='CreatePost-bbottom-buttons'>
+                      {title && (
+                        (!commentContentCD) && (
+                          <button onClick={showUploadWidget} className="CreatePost-submit">Upload and comment</button>
+                        )
+                      )}
+                      {(title) && (
+                        (commentContentCD) && (
 
+                          <button onClick={handleDiscard} className="CreatePost-discard">Discard</button>
+                        )
+                      )}
+                      <button className='CreatePost-submit'>comment</button>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+              <div className='Post-buttom-comment-list'>
+                {post.postComments.map(comment => <Comment callBackFeeds={callBackFeeds} key={comment._id} comment={comment} />).reverse()}
+              </div>
             </div>
-            <div className='Post-buttom-comment-list'>
-              {post.postComments.map(comment => <Comment callBackFeeds={callBackFeeds} key={comment._id} comment={comment} />).reverse()}
-            </div>
-          </div>
           }
-          
+
 
         </div>
       </div>
