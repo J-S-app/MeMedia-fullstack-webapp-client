@@ -7,22 +7,13 @@ import LinkTwoToneIcon from '@mui/icons-material/LinkTwoTone';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context'
 import { NavLink } from 'react-router-dom';
-import Alert from '../cloudinaryUpload/Alert';
-import Axios from "axios";
-
-
 
 
 const CreatePost = ({ callBackFeeds }) => {
   const [title, setTitle] = useState('')
   const [userdet, setUserdet] = useState('')
+  const [postContentForCD, setPostContentForCD] = useState('');
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
-
-  const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
-  const [successMsg, setSuccessMsg] = useState('');
-  const [errMsg, setErrMsg] = useState('');
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
@@ -33,29 +24,20 @@ const CreatePost = ({ callBackFeeds }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    
-    if (selectedFile){
-      console.log("We have a selected file")
-      handleSubmitFile()
-    } else {
-      console.log("No selected file")
-      const requestBody = { title }
-      apiServices
-          .createPostRoute(requestBody, header)
-          .then(response => {
-            callBackFeeds()
-            setTitle('')
-            setFileInputState('');
-            setPreviewSource('');
-            setSuccessMsg('Image uploaded successfully');
-            setSelectedFile()
-          })
-          .catch(e => {
-            console.log(header)
-            console.log('error creating post', e)
-          })
-    }
+    const requestBody = { 
+      title,
+    postContent: postContentForCD }
+    apiServices
+      .createPostRoute(requestBody, header)
+      .then(response => {
+        callBackFeeds()
+        setTitle('')
+        setPostContentForCD('')
+      })
+      .catch(e => {
+        console.log(header)
+        console.log('error creating post', e)
+      })
 
   }
 
@@ -77,88 +59,68 @@ const CreatePost = ({ callBackFeeds }) => {
 
   }, [user])
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    previewFile(file);
-    setSelectedFile(file);
-    setFileInputState(e.target.value);
-  };
-
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
-  };
-
-  const handleSubmitFile = (e) => {
-    // e.preventDefault();
-    if (!selectedFile) return;
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    reader.onloadend = () => {
-      uploadImage(reader.result);
-    };
-    reader.onerror = () => {
-      console.error('AHHHHHHHH!!');
-      setErrMsg('something went wrong!');
-    };
-  };
-
-  const uploadImage = () => {
-
-    const formData = new FormData();
-    formData.append("file", selectedFile)
-    formData.append("upload_preset", "rgly7uw1")
-
-    Axios.post("https://api.cloudinary.com/v1_1/memediacloud/image/upload", formData)
-      .then(response => {
-        console.log(response.data.secure_url)
-
-        const requestBody = { 
-          title, 
-          postContent: response.data.secure_url
+  function showUploadWidget(e) {
+    e.preventDefault()
+    cloudinary.openUploadWidget({
+      cloudName: "memediacloud",
+      uploadPreset: "rgly7uw1",
+      sources: ["local", "url", "camera", "image_search", "facebook", "dropbox", "instagram", "getty", "istock"],
+      googleApiKey: "AIzaSyCOms5CX5Je-Yk92vxex2uWopweDa3Q6Kg",
+      showAdvancedOptions: true,
+      cropping: true,
+      multiple: false,
+      // folder: "user_images", 
+      tags: ["meme", "lol","memes"],
+      // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+      // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+      // theme: "purple", //change to a purple theme
+      defaultSource: "local",
+      styles: {
+        palette: {
+          window: "#FFFFFF",
+          windowBorder: "#90A0B3",
+          tabIcon: "#0078FF",
+          menuIcons: "#5A616A",
+          textDark: "#000000",
+          textLight: "#FFFFFF",
+          link: "#0078FF",
+          action: "#FF620C",
+          inactiveTabIcon: "#0E2F5A",
+          error: "#F44235",
+          inProgress: "#0078FF",
+          complete: "#20B832",
+          sourceBg: "#E4EBF1"
+        },
+        fonts: {
+          default: null,
+          "'Fira Sans', sans-serif": {
+            url: "https://fonts.googleapis.com/css?family=Fira+Sans",
+            active: true
+          }
         }
-        console.log(requestBody)
-
-        return apiServices
-          .createPostRoute(requestBody, header)
-          .then(response => {
-            callBackFeeds()
-            setTitle('')
-            setFileInputState('');
-            setPreviewSource('');
-            setSuccessMsg('Image uploaded successfully');
-            setSelectedFile()
-          })
-          .catch(e => {
-            console.log(header)
-            console.log('error creating post', e)
-          })
-      })
-
-      .catch(e => {
-        console.log("error uploading content to cloudinary", e)
-      })
+      }
+    }, (err, result) => {
+      if (!err && result && result.event === "success") {
+        // console.log("Upload Widget event - ", info);
+        // console.log(result.info.secure_url)
+        setPostContentForCD(result.info.secure_url)
+      }
+    });
   }
 
-
-
-
-
-
+  const handleDiscard = (e) =>{
+    e.preventDefault()
+    setPostContentForCD('')
+  }
 
   return (
     <div className='CreatePost-Container'>
-      <Alert msg={errMsg} type="danger" />
-      <Alert msg={successMsg} type="success" />
       <form onSubmit={handleSubmit} className='CreatePost-background-controller'>
         <div className='CreatePost-top'>
           <div className='CreatePost-profile-title'>
             <img src={userdet.profileImage || require("../../assets/placeholder.png")} className='CreatePost-profile-img' />
             <NavLink to={`/profile/${userdet._id}`}>
-            <h5>{userdet.username} </h5>
+              <h5>{userdet.username} </h5>
             </NavLink>
 
           </div>
@@ -169,27 +131,35 @@ const CreatePost = ({ callBackFeeds }) => {
             className='CreatePost-joke-title'
             onChange={setTitle}
           />
+          <div className='CreatePost-buttom-preload'>
+        {postContentForCD && (
+            < >
+              <img
+                src={postContentForCD}
+                alt="chosen"
+                style={{ maxHeight: '100px' }}
+              />
+            </>
+          )}
+          </div>
         </div>
         <hr className='CreatePost-hr' />
         <div className='CreatePost-buttom'>
-          {/* <input type="file" className='CreatePost-file-input' name="img" accept="image/*" /> */}
-          <input
-            id="fileInput"
-            type="file"
-            name="image"
-            onChange={handleFileInputChange}
-            value={fileInputState}
-            className="CreatePost-file-input"
-          />
+          <div className='CreatePost-bbottom-buttons'>
           <LinkTwoToneIcon className='CreatePost-file-input' />
-          {previewSource && (
-            <img
-              src={previewSource}
-              alt="chosen"
-              style={{ maxHeight: '300px' }}
-            />
+          {(title )&& (
+            (!postContentForCD) &&(
+            <button onClick={showUploadWidget} className="CreatePost-submit">Upload</button>
+            )
+          )}
+          {(title )&& (
+            (postContentForCD) &&(
+
+            <button onClick={handleDiscard} className="CreatePost-discard">Discard</button>
+            )
           )}
           <button className='CreatePost-submit'>Post</button>
+          </div>
         </div>
       </form>
     </div>
