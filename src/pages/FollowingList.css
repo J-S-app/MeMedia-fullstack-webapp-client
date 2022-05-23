@@ -1,6 +1,18 @@
 
 
 
+.FollowersList-fallowers-list a{
+  text-decoration: none;
+  color: #132743; 
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.FollowersList-fallowers-list a:hover{
+  color: #407088; 
+}
+
+
 
 .FollowingList-fallowers-image{
   margin-right: 10px;

@@ -1,6 +1,7 @@
 .SideBar-right{
   flex: 4;
   padding: 10px;
+
 }
 
 .SideBar-right-container{
@@ -14,10 +15,28 @@
   align-items: flex-end;
 }
 
+.SideBar-Right-Follower-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.SideBar-Right-Follower-info a{
+  text-decoration: none;
+color: #132743; 
+font-weight: 600;
+font-size: 14px;
+}
+
+.SideBar-Right-Follower-info a:hover{
+  color: #407088; 
+}
 
 .SideBar-right-birthday-icon{
   margin-right: 5px;
 }
+
+
 
 .SideBar-right-random-meme-title{
   margin-top: 50px;
@@ -34,6 +53,7 @@
 }
 
 .SideBar-right-online-followers-item{
+  margin-top: 15px;
   display: flex;
   align-items: center;
 }

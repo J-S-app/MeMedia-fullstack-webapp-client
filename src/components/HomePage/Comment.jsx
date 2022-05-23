@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
 
 
-const Comment = ({ comment ,callBackFeeds }) => {
+const Comment = ({ comment, callBackFeeds }) => {
   const [commentOwner, setCommentOwner] = useState('')
   const [likeColor, setLikeColor] = useState('')
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -42,18 +42,18 @@ const Comment = ({ comment ,callBackFeeds }) => {
       })
   }, [])
 
-const handleLike=()=>{
-  apiServices
-  .likesCommentRoute(comment._id, header, header)
-  .then(response => {
-    callBackFeeds()
-  })
-  .catch(error => {
-    const errorDescription = error.response.data.errorMessage;
-    console.log("error like comment ", errorDescription)
-    setErrorMessage(errorDescription);
-  })
-}
+  const handleLike = () => {
+    apiServices
+      .likesCommentRoute(comment._id, header, header)
+      .then(response => {
+        callBackFeeds()
+      })
+      .catch(error => {
+        const errorDescription = error.response.data.errorMessage;
+        console.log("error like comment ", errorDescription)
+        setErrorMessage(errorDescription);
+      })
+  }
 
 
 
@@ -61,24 +61,33 @@ const handleLike=()=>{
     <div className='Comment-container'>
       <hr />
       <div className='Comment-title-and-owner'>
+      <div className='Comment-content-wrapper'>
+      <div className='Comment-title-and-owner-info'>
         <img src={commentOwner.profileImage || require("../../assets/placeholder.png")} className='Comment-profile-img' />
         <NavLink to={`/profile/${commentOwner._id}`}>
-        <span>{commentOwner.username}</span>
+          <span>{commentOwner.username}</span>
         </NavLink>
-        <p className='Comment-title'>{comment.title}</p>
-        {comment?.commentContent && (
-            <div className='Post-post-content'>
-              <img
-                src={comment.commentContent}
-                alt="chosen"
-                style={{ maxHeight: '200px' }}
-              />
-            </div>
+        </div>
+        <div className='Comment-post-data' >
+        <span className='Comment-title'>{comment.title}</span>
+          {comment?.commentContent && (
+
+            <img
+              src={comment.commentContent}
+              alt="chosen"
+              className='Comment-post-content'
+            />
+
           )}
-        <FavoriteIcon htmlColor={likeColor} onClick={handleLike} className='Comment-title-like-icon'  />
+          
+        </div>
+        </div>
+        <div className='Comment-like'>
+        <FavoriteIcon htmlColor={likeColor} onClick={handleLike} className='Comment-title-like-icon' />
         <span>{comment.commentLikes.length == 0 ? `` : `${comment.commentLikes.length} people like this`}</span>
+        </div>
       </div>
-    
+
 
     </div>
 

@@ -3,6 +3,25 @@
   width: 100%;
 }
 
+.ProfilePage-container hr{
+  margin: 40px 0;;
+}
+
+.ProfilePage-container a{
+  text-decoration: none;
+  color: #132743; 
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ProfilePage-container a:hover{
+
+  color: #407088; 
+}
+  
+
+
+
 .ProfilePage-right{
   flex: 9;
 }
@@ -13,13 +32,13 @@ display: flex;
 }
 
 .ProfilePage-right-top-images{
-  height: 350px;
+  height:450px;
   position: relative;
 }
 
 .ProfilePage-right-top-coverimage{
   width: 100%;
-  height: 270px;
+  height: 370px;
   object-fit: cover;
   background-color: rgb(154, 154, 154);
 }
@@ -31,7 +50,7 @@ display: flex;
   border-radius: 50%;
   position: absolute;
   left: 40px;
-  top: 170px;
+  top: 270px;
   border: 3px solid whitesmoke;
  
 }
@@ -42,7 +61,7 @@ display: flex;
   align-items: flex-start;
   position: absolute;
   left: 215px;
-  top: 220px;
+  top: 320px;
 }
 
 .ProfilePage-right-top-username{
@@ -57,6 +76,8 @@ text-align: start;
 
 .ProfilePage-right-userDetail{
   display: flex;
+text-align: left;
+width: 90%;
 }
 
 
@@ -71,4 +92,21 @@ text-align: start;
 
 .ProfilePage-right-ProfileFeeds{
   flex:6;
+}
+
+.ProfilePage-right-bottom-right-followerslist{
+  margin-top: 20px;
+}
+
+.ProfilePage-right-followbtn{
+  padding:10px 25px;
+  background-color: #ffb5b5; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.ProfilePage-right-followbtn:hover{
+  background-color: #f48f8f; 
 }

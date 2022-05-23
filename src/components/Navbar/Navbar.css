@@ -67,3 +67,13 @@
   outline: none;
 }
 
+
+.Navbar-logout{
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  margin-right: 10px;
+  background-color: #407088; 
+  border: none;
+
+}

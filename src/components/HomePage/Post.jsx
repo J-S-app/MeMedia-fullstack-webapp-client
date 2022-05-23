@@ -191,6 +191,7 @@ const Post = ({ post, callBackFeeds }) => {
           {post?.postContent && (
             <div className='Post-post-content'>
               <img
+               className='Post-shared-img' 
                 src={post.postContent}
                 alt="chosen"
                 style={{ maxHeight: '300px' }}

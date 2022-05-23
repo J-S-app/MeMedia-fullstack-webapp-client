@@ -47,6 +47,8 @@ button [type="submit"]:hover {
 
 .ProfileSetting-right-top-images {
   height: 350px;
+  width:40%;
+
   position: relative;
 }
 
@@ -142,6 +144,7 @@ button [type="submit"]:hover {
   text-align: start;
   align-items: baseline;
   justify-content: space-between;
+
 }
 
 .ProfileSetting-submit {

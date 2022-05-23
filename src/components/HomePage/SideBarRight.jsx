@@ -50,33 +50,35 @@ const SideBarRight = () => {
         <h4 className='SideBar-right-random-meme-title'>Random Meme</h4>
         <img src={require('../../assets/memes/(12).jpg')} className="SideBar-right-random-meme" />
         <hr />
-        <h4 className='SideBar-right-online-followers-title' >Followers</h4>
+        <div className='SideBar-Right-Follower-info'>
+          <h4 className='SideBar-right-online-followers-title' >Followers</h4>
           <span>
-          {followersList.length > 0 &&
-          <NavLink to={`/${user?._id}/followers`}>See All</NavLink>
-        }
+            {followersList.length > 0 &&
+              <NavLink to={`/${user?._id}/followers`}>See All</NavLink>
+            }
           </span>
-        <div className='SideBar-right-online-followers'>
-          {followersList.length > 0
-            ?
-            followersList.map((follower, index) => {
-              if (index < 8) {
-                return (
-                  <>
-                    <div className="SideBar-right-online-followers-item">
-                      <img src={follower.profileImage || require("../../assets/placeholder.png")} className="SideBar-right-fallowers-image" />
-                      <NavLink to={`/profile/${follower._id}`}>
-                        <h5 className="SideBar-right-online-followers-name">{follower.username}</h5>
-                      </NavLink>
-                    </div>
-                  </>
-                )
-              }
-            })
-            :
-            ''
-          }
+          <div className='SideBar-right-online-followers'>
+            {followersList.length > 0
+              ?
+              followersList.map((follower, index) => {
+                if (index < 8) {
+                  return (
+                    <>
+                      <div className="SideBar-right-online-followers-item">
+                        <img src={follower.profileImage || require("../../assets/placeholder.png")} className="SideBar-right-fallowers-image" />
+                        <NavLink to={`/profile/${follower._id}`}>
+                          <h5 className="SideBar-right-online-followers-name">{follower.username}</h5>
+                        </NavLink>
+                      </div>
+                    </>
+                  )
+                }
+              })
+              :
+              ''
+            }
 
+          </div>
         </div>
       </div>
     </div>

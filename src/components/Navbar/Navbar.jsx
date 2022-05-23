@@ -62,21 +62,22 @@ const Navbar = () => {
             <NavLink to='/' >
               <HomeIcon htmlColor="white" className="Navbar-center-item" />
             </NavLink>
+            <NavLink to={`/${userDetail?._id}/messages`} className="authLink">
+              <EmailIcon htmlColor="white" />
+            </NavLink>
             {/*        
         <NavLink to='/search'>
         <PageviewIcon htmlColor="white" className="Navbar-center-item" />
         </NavLink> */}
           </div>
           <div className="Navbar-right">
-            <NavLink to={`/${userDetail?._id}/messages`} className="authLink">
-              <EmailIcon htmlColor="white" />
-            </NavLink>
+            
 
             <NavLink to={`/profile/${userDetail?._id}`} className="authLink">
               <img src={userDetail.profileImage || require("../../assets/placeholder.png")} className='Navbar-profile-img' />
             </NavLink>
 
-            <button onClick={logOutUser} >Logout</button>
+            <button className="Navbar-logout"  onClick={logOutUser} >Logout</button>
 
           </div>
         </>

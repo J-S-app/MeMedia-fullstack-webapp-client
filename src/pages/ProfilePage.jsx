@@ -106,7 +106,7 @@ const ProfilePage = () => {
   const birthdayDate = String(userDetail.birthday).substring(0, 10)
 
   const followbtn = followresponse?.filter(usr => usr._id == userId && usr?.followers.includes(user._id))
-console.log(followresponse,"folowbtn",followbtn)
+  console.log(followresponse, "folowbtn", followbtn)
 
 
   return (
@@ -130,7 +130,7 @@ console.log(followresponse,"folowbtn",followbtn)
           <>
             {user?._id != userId
               ?
-              <button onClick={handleFollow}>{followbtn.length > 0 ? "Unfollow" : "Follow"}</button>
+              <button className='ProfilePage-right-followbtn' onClick={handleFollow}>{followbtn.length > 0 ? "Unfollow" : "Follow"}</button>
               :
               <NavLink to={`/profile/${userId}/setting`}> Edit Profile </NavLink>
             }
@@ -142,11 +142,11 @@ console.log(followresponse,"folowbtn",followbtn)
           </div>
           <div className='ProfilePage-right-bottom-right'>
             <div className='ProfilePage-right-bottom-right-userDetail'>
-              <h5>{birthdayDate == 'undefined' ? '' : birthdayDate}</h5>
-              <p>{userDetail.country}</p>
-              <h5>About Meme :</h5>
-              <p>{userDetail.aboutMeme}</p>
+              <h5><b>Birthday : </b> {birthdayDate == 'undefined' ? '' : birthdayDate}</h5>
+              <p><b>Country : </b> {userDetail.country}</p>
+              <p><b>About Meme : </b>{userDetail.aboutMeme}</p>
             </div>
+            <hr/>
             <div className='ProfilePage-right-bottom-right-followerslist'>
               <h4 className='ProfilePage-right-followerslist-title' >Followers</h4>
               <span>

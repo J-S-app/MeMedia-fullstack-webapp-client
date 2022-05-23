@@ -1,12 +1,25 @@
 
 .CreatePost-Container{
   margin: 20px;
-  width: 100%;
+  width: 90%;
   max-height: 500px;
   border-radius: 8px;
   background-color: white;
   -webkit-box-shadow: 0px 10px 13px -7px #d6d6d6, 25px -14px 15px 26px rgba(242, 242, 242, 0.827); 
 box-shadow: 0px 10px 13px -7px #b5b4b4, 25px -14px 15px 26px rgba(242, 242, 242, 0.093);
+}
+
+
+.CreatePost-Container a{
+  text-decoration: none;
+  color: #132743; 
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+.CreatePost-Container a:hover{
+  color: #407088; 
 }
 
 .CreatePost-background-controller{
@@ -42,8 +55,9 @@ box-shadow: 0px 10px 13px -7px #b5b4b4, 25px -14px 15px 26px rgba(242, 242, 242,
 
 }
 .CreatePost-bbottom-buttons{
+  margin: 0 15px;
 display: flex;
-justify-content:space-around;
+justify-content:space-between;
 align-items: center;
 }
 
