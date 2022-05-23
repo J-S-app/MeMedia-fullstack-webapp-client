@@ -11,6 +11,7 @@ const SideBarRight = () => {
   const [followersList, setFollowersList] = useState([])
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [randomizedMeme,setRandomizedMeme] = useState(1);
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
@@ -33,11 +34,8 @@ const SideBarRight = () => {
   }
   useEffect(() => {
     callBackFollowersList()
+    setRandomizedMeme(Math.floor(Math.random()*(42-1+1)+1))
   }, [user?._id])
-
-
-
-
 
 
   return (
@@ -48,7 +46,7 @@ const SideBarRight = () => {
           <span className='SideBar-right-birthday-text'>Happy Birthday XXXX Username</span>
         </div>
         <h4 className='SideBar-right-random-meme-title'>Random Meme</h4>
-        <img src={require('../../assets/memes/(12).jpg')} className="SideBar-right-random-meme" />
+        <img src={require(`../../assets/memes/(${randomizedMeme}).jpg`)} className="SideBar-right-random-meme" onClick={(e)=>{setRandomizedMeme(Math.floor(Math.random()*(42-1+1)+1))}}/>
         <hr />
         <div className='SideBar-Right-Follower-info'>
           <h4 className='SideBar-right-online-followers-title' >Followers</h4>

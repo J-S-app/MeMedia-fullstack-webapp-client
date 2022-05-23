@@ -195,6 +195,7 @@ const ProfileSetting = () => {
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className='ProfileSetting-input-text'
             />
           </div>
           <div className='ProfileSetting-right-top-country'>
@@ -204,6 +205,7 @@ const ProfileSetting = () => {
               name="username"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
+              className='ProfileSetting-input-text'
             />
           </div>
           <div className='ProfileSetting-right-top-country'>
@@ -223,6 +225,7 @@ const ProfileSetting = () => {
               name="catchPhrase"
               value={catchPhrase}
               onChange={(e) => setCatchPhrase(e.target.value)}
+              className='ProfileSetting-input-textarea'
             />
           </div>
           <div className='ProfileSetting-right-top-About'>
@@ -231,6 +234,7 @@ const ProfileSetting = () => {
               name="aboutMeme"
               value={aboutMeme}
               onChange={(e) => setAboutMeme(e.target.value)}
+              className='ProfileSetting-input-textarea'
             />
           </div>
 

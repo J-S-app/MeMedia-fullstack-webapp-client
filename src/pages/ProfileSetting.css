@@ -202,3 +202,11 @@ button [type="submit"]:hover {
   font-size: 16px;
   padding: 16px 32px;
 }
+
+.ProfileSetting-input-text{
+  min-height: 3em;
+}
+
+.ProfileSetting-input-textarea{
+  min-height: 8em;
+}
