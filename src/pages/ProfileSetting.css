@@ -1,0 +1,201 @@
+.ProfileSetting-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(237, 237, 237);
+}
+
+.ProfileSetting-info-container {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  width: 100%;
+  max-height: fit-content;
+  border-radius: 8px;
+  background-color: white;
+  -webkit-box-shadow: 0px 10px 13px -7px #d6d6d6,
+    25px -14px 15px 26px rgba(242, 242, 242, 0.827);
+  box-shadow: 0px 10px 13px -7px #b5b4b4,
+    25px -14px 15px 26px rgba(242, 242, 242, 0.093);
+  margin-bottom: 10em;
+  padding-bottom: 10rem;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 60%; /* Full width */
+  padding: 12px; /* Some padding */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+button [type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.ProfileSetting-right-bottom {
+  display: flex;
+}
+
+.ProfileSetting-right-top-images {
+  height: 350px;
+  position: relative;
+}
+
+.ProfileSetting-right-top-coverimage {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  background-color: rgb(154, 154, 154);
+}
+
+.ProfileSetting-right-top-coverimage:hover {
+    cursor: pointer;
+}
+
+.ProfileSetting-right-top-profileimage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  left: 40px;
+  top: 170px;
+  border: 3px solid whitesmoke;
+}
+
+.ProfileSetting-right-top-profileimage:hover{
+    cursor: pointer;
+}
+
+.ProfileSetting-page-name {
+  position: absolute;
+  top: auto;
+  right: 90%;
+
+  padding: 10px 25px;
+  background-color: #407088;
+  max-width: 80px;
+  color: white;
+  border: none;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-weight: 600;
+}
+.ProfileSetting-right-top-userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  left: 215px;
+  top: 220px;
+}
+
+.ProfileSetting-right-top-username {
+  display: flex;
+  width: 40%;
+  text-align: start;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ProfileSetting-right-top-country {
+  display: flex;
+  width: 40%;
+  text-align: start;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ProfileSetting-right-top-country {
+  display: flex;
+  width: 40%;
+  text-align: start;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ProfileSetting-right-top-calendar {
+  display: flex;
+  align-items: flex-end;
+}
+
+.ProfileSetting-right-top-catchphrase {
+  display: flex;
+  width: 40%;
+  text-align: start;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ProfileSetting-right-top-About {
+  display: flex;
+  width: 40%;
+  text-align: start;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ProfileSetting-submit {
+  padding: 10px 25px;
+  background-color: #407088;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.ProfileSetting-submit:hover {
+  background-color: #65a2b0;
+}
+
+.ProfileSettings-image-validation-message {
+  padding: 10px 25px;
+  background-color: #ffb5b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* .ProfileSetting-right-userDetail {
+  display: flex;
+}
+
+.ProfileSetting-right-bottom-right {
+  flex: 3;
+}
+
+.ProfileSetting-left {
+  flex: 3;
+}
+
+.ProfileSetting-right-ProfileFeeds {
+  flex: 6;
+} */
+
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text {
+  background-color: #04aa6d;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
