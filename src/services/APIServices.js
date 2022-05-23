@@ -80,6 +80,36 @@ class APIServices {
     likesCommentRoute = (commentId,headers,header) => {
         return this.api.put(`/comments/${commentId}`,headers,header)
     }
+
+
+    //message method
+    createMessageRoute = (requestBody,header) => {
+      return this.api.post('/messages' ,requestBody ,header)
+    }
+
+    getAllMessageRoute = (messageId,header) => {
+      return this.api.get(`/messages/${messageId}`,header)
+    }
+
+
+    //onlinechat method
+
+    createChatRoute = (requestBody,header) => {
+      return this.api.post('/onlinechats' ,requestBody ,header)
+    }
+
+    getAllChatsRoute = (userId,header) => {
+      return this.api.get(`/onlinechats/${userId}`,header)
+    }
+
+
+    getCommonChatRoute = (senderId,reciverId,header) => {
+      return this.api.get(`/onlinechats/${senderId}/${reciverId}`,header)
+    }
+
+
+
+
 }
 
 const apiServices = new APIServices();

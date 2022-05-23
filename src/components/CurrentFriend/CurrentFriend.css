@@ -1,0 +1,7 @@
+.CurrentFriend-user-image{
+  margin-right: 10px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}

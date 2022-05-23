@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import HomeIcon from '@mui/icons-material/Home';
 import PageviewIcon from '@mui/icons-material/Pageview';
-import { useState, useEffect, useContext } from "react";                     // <== IMPORT 
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import apiServices from '../../services/APIServices';
-
+import EmailIcon from '@mui/icons-material/Email';
 
 const Navbar = () => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -18,25 +18,25 @@ const Navbar = () => {
 
 
 
-const CallbackGetUserDetail=()=>{
-  if( user){
-    apiServices
-    .userDetailsRoute(user._id,header)
-    .then(response=>setUserDetail(response.data) )
-    .catch(error => {
-      const errorDescription = error.response.data.message;
-      console.log("error  getting user detail", errorDescription)
-      setErrorMessage(errorDescription);
-    })
+  const CallbackGetUserDetail = () => {
+    if (user) {
+      apiServices
+        .userDetailsRoute(user._id, header)
+        .then(response => setUserDetail(response.data))
+        .catch(error => {
+          const errorDescription = error.response.data.message;
+          console.log("error  getting user detail", errorDescription)
+          setErrorMessage(errorDescription);
+        })
+    }
   }
-}
 
 
 
   useEffect(() => {
-   
+
     CallbackGetUserDetail()
-  
+
   }, [user?._id])
 
 
@@ -68,9 +68,14 @@ const CallbackGetUserDetail=()=>{
         </NavLink> */}
           </div>
           <div className="Navbar-right">
+            <NavLink to={`/${userDetail?._id}/messages`} className="authLink">
+              <EmailIcon htmlColor="white" />
+            </NavLink>
+
             <NavLink to={`/profile/${userDetail?._id}`} className="authLink">
               <img src={userDetail.profileImage || require("../../assets/placeholder.png")} className='Navbar-profile-img' />
             </NavLink>
+
             <button onClick={logOutUser} >Logout</button>
 
           </div>
@@ -79,8 +84,8 @@ const CallbackGetUserDetail=()=>{
 
       {!isLoggedIn &&
         <>
-        <div className="Navbar-left">
-          <h3 style={{color : "white"}} className="Navbar-logo">MeMedia</h3>
+          <div className="Navbar-left">
+            <h3 style={{ color: "white" }} className="Navbar-logo">MeMedia</h3>
           </div>
           <div className="Navbar-right">
             <NavLink to='/auth/signup' className="authLink">

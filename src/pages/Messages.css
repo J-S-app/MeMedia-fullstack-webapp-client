@@ -1,0 +1,16 @@
+.Messages-container{
+  display: flex;
+
+}
+
+.Messages-leftbar{
+flex:3;
+}
+
+.Messages-rightbar{
+  flex:3;
+  }
+
+  .Messages-center{
+    flex:6;
+    }

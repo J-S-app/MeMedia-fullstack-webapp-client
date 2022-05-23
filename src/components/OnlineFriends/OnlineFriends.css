@@ -1,0 +1,12 @@
+.OnlineFriends-user-image{
+  margin-right: 10px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.OnlineFriends{
+  margin-top: 100px;
+}
