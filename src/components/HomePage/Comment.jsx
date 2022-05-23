@@ -66,6 +66,15 @@ const handleLike=()=>{
         <span>{commentOwner.username}</span>
         </NavLink>
         <p className='Comment-title'>{comment.title}</p>
+        {comment?.commentContent && (
+            <div className='Post-post-content'>
+              <img
+                src={comment.commentContent}
+                alt="chosen"
+                style={{ maxHeight: '200px' }}
+              />
+            </div>
+          )}
         <FavoriteIcon htmlColor={likeColor} onClick={handleLike} className='Comment-title-like-icon'  />
         <span>{comment.commentLikes.length == 0 ? `` : `${comment.commentLikes.length} people like this`}</span>
       </div>
