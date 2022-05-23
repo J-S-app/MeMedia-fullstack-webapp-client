@@ -10,11 +10,12 @@ import EditPost from "./pages/EditPost";
 import FollowingList from "./pages/FollowingList";
 import ProfileSetting from "./pages/ProfileSetting";
 import FollowersList from "./pages/FollowersList";
-
-
+import Messages from "./pages/Messages";
 
 
 function App() {
+
+
   return (
     <div className="App">
 <Navbar />
@@ -28,6 +29,7 @@ function App() {
           <Route  path='/editpost/:postId' element={<EditPost/>} />
           <Route  path='/:userId/followings' element={<FollowingList />} />
           <Route  path='/:userId/followers' element={<FollowersList />} />
+          {/* <Route  path='/:userId/messages' element={<Messages />} /> */}
 
       </Routes>
     </div>
