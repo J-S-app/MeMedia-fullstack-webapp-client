@@ -38,6 +38,8 @@ margin-left: 20px;
 .Messages-center-top{
   height: 100%;
   padding-right: 10px;
+  background-color: rgb(243, 242, 242);
+  padding: 25px;
 
 }
 
@@ -73,6 +75,7 @@ outline: none;
   cursor: pointer;
   background-color: #ffb5b5; 
   color: white;
+  padding: 10px 20px;
 
 }
 
