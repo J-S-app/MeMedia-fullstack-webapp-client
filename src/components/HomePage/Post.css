@@ -2,6 +2,7 @@
   width: 100%;
   border-radius: 8px;
   margin: 20px;
+  max-height: fit-content;
   background-color: white;
   -webkit-box-shadow: 0px 10px 13px -7px #d6d6d6, 25px -14px 15px 26px rgba(242, 242, 242, 0.827); 
 box-shadow: 0px 10px 13px -7px #b5b4b4, 25px -14px 15px 26px rgba(242, 242, 242, 0.093);
