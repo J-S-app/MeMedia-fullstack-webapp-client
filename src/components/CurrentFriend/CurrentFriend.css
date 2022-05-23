@@ -5,3 +5,15 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+.CurrentFriend{
+  text-decoration: none;
+color: #132743; 
+font-weight: 600;
+font-size: 14px;
+cursor: pointer;
+}
+
+.CurrentFriend:hover{
+  color: #407088; 
+}

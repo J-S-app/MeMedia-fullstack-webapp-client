@@ -1,7 +1,50 @@
+.Chat-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.Chat-top{
+  display: flex;
+max-width: 300px;
+}
+
 .Chat-user-image{
   margin-right: 10px;
   width: 45px;
   height: 45px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.Chat-message-text{
+  padding: 10px;
+  border-radius: 20px ;
+  background-color: #407088; 
+  max-width: 300px ;
+  color: white;
+  font-size: 14px;
+}
+
+
+
+.Chat-create-date{
+  align-self: flex-start;
+  color:gray;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.Chat-container.own{
+  align-items: flex-end;
+
+}
+
+.Chat-container.own .Chat-message-text{
+  background-color: #f0cfcf; 
+  color: black;
+}
+
+.Chat-container.own .Chat-create-date{
+  align-self: flex-end;
 }

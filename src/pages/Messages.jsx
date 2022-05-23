@@ -5,7 +5,6 @@ import './Messages.css'
 import { useParams } from 'react-router-dom';
 import { AuthContext } from "../context/auth.context"
 import { useState, useEffect, useContext, useRef } from "react";
-import { NavLink } from 'react-router-dom';
 import apiServices from '../services/APIServices';
 import { io } from "socket.io-client";
 
@@ -197,8 +196,8 @@ useEffect(() => {
   return (
     <div className='Messages-container'>
       <div className='Messages-leftbar'>
-        <div>
-          <input placeholder='search' type="search" />
+        <div className='Messages-leftbar-wrapper'>
+          {/* <input placeholder='search' className="Messages-leftbar-input"  type="search" /> */}
           {chatPairs.map(conversation => {
             return (
               <div onClick={() =>callBackUpdatChat(conversation)}>
@@ -210,34 +209,40 @@ useEffect(() => {
         </div>
       </div>
       <div className='Messages-center'>
-        <div>
+        <div className='Messages-center-wrapper'>
           {currentChat
             ?
             <>
-              <div ref={scrollRef}>
-                {message.map(msg => <Chat message={msg} />)}
-              </div>
-              <div>
-                <form onSubmit={handleSubmit}>
+            <div className='Messages-center-top'>
+            {message.map(msg =>{
+              return (
+                <div ref={scrollRef}> <Chat message={msg} own={msg.messageSender == user._id} /></div>
+              )
+              
+               })}
+            </div>
+              <div >
+                <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
                     type='text'
                     value={newMessage}
+                    className='Messages-center-bottom-input'
                     placeholder='write message here...'
                     onChange={(e) => setNewMessage(e.target.value)}
                   ></textarea>
-                  <button>send</button>
+                  <button className='Messages-center-bottom-submitbtn'>send</button>
                 </form>
               </div>
             </>
             :
-            <span>Start a new chat</span>
+            <span className="noConversationText"> Start a new chat</span>
           }
 
 
         </div>
       </div>
       <div className='Messages-rightbar'>
-        <div>
+        <div className='Messages-rightbar-wrapper'>
           <OnlineFriends onlineUsers={onlineFriends}  setCurrentChat={callBackUpdatChat} />
         </div>
       </div>

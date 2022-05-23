@@ -5,7 +5,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { NavLink } from 'react-router-dom';
 
 
-const Chat = ({ message }) => {
+const Chat = ({ message, own }) => {
 
   const [senderMsgDetail, setSenderMsgDetail] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -40,17 +40,18 @@ const Chat = ({ message }) => {
 
 
   return (
-    <div className='Chat'>
-      <div>
-        <img src={senderMsgDetail.profileImage || require("../../assets/placeholder.png")} className="Chat-user-image" />
+    <div className={own ? 'Chat-container own' : 'Chat-container'}>
+      <div className='Chat-top'>
+
         <NavLink to={`/profile/${senderMsgDetail._id}`}>
-          <h5>{senderMsgDetail.username}</h5>
+          <img src={senderMsgDetail.profileImage || require("../../assets/placeholder.png")} className="Chat-user-image" />
         </NavLink>
-        <p>{message.messageText}</p>
+
+        <p className='Chat-message-text'>{message.messageText}</p>
       </div>
-      <div>
-        <span>{format(message.createdAt)}</span>
-      </div>
+      <div className='Chat-create-date'>
+       {format(message.createdAt)}
+      </div><br />
     </div>
   )
 }

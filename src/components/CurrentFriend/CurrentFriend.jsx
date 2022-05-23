@@ -34,9 +34,8 @@ const CurrentFriend = ({ chat, currentUser }) => {
     <div>
 
       <img src={friend.profileImage || require("../../assets/placeholder.png")} className="CurrentFriend-user-image" />
-      <div className='badge'></div>
-
-      <h5 className="ProfileLeftBar-followers-name">{friend.username}</h5>
+    
+      <h5 className="CurrentFriend">{friend.username}</h5>
     </div>
   )
 }

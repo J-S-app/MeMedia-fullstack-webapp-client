@@ -1,16 +1,90 @@
 .Messages-container{
+  margin-top: 40px;
+  height: calc(100vh - 70px);
   display: flex;
 
 }
 
 .Messages-leftbar{
-flex:3;
+flex:3.5;
+margin-left: 20px;
+
 }
 
 .Messages-rightbar{
-  flex:3;
+  flex:3.5;
+ }
+
+.Messages-center{
+  flex:5;
+}
+
+.Messages-center-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.Messages-leftbar-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+}
+
+
+
+.Messages-center-top{
+  height: 100%;
+  padding-right: 10px;
+
+}
+
+
+.Messages-center-bottom{
+  margin-top: 5px;
+  margin-bottom: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   }
 
-  .Messages-center{
-    flex:6;
-    }
+.Messages-center-bottom-input{
+  width: 80%;
+  height: 90px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 20px;
+
+}
+
+.Messages-center-bottom-input:focus{
+outline: none;
+
+}
+
+.Messages-center-bottom-submitbtn{
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffb5b5; 
+  color: white;
+
+}
+
+.Messages-center-bottom-submitbtn:hover{
+  background-color: #f48f8f; 
+}
+
+
+.noConversationText{
+  position: absolute;
+  top: 20vh;
+  font-size: 30px;
+  color: rgb(190, 197, 212);
+  cursor: default;
+}
