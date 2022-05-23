@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/auth.context';
 
 
 
-const ProfileFeeds = ({userId}) => {
+const ProfileFeeds = ({ userId }) => {
   const [posts, setPosts] = useState([]);
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -15,15 +15,15 @@ const ProfileFeeds = ({userId}) => {
 
   const storedToken = localStorage.getItem("authToken");
 
-  const callBackFeeds =()=>{
+  const callBackFeeds = () => {
     apiServices
-    .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
-    .then(response => setPosts(response.data.reverse()))
-    .catch(error => {
-      const errorDescription = error.response.data.message;
-      console.log("error getting all posts", errorDescription)
-      setErrorMessage(errorDescription);
-    })
+      .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
+      .then(response => setPosts(response.data.reverse()))
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log("error getting all posts", errorDescription)
+        setErrorMessage(errorDescription);
+      })
   }
 
   //getting all postes in database
@@ -36,22 +36,42 @@ const ProfileFeeds = ({userId}) => {
   return (
     <>
       <div className='ProfileFeeds'>
-      {user?._id == userId
-      ?
-      <CreatePost callBackFeeds={callBackFeeds} />
-      
-      :
-      ''
-      } 
-        {posts.length > 0
+        {userId &&
+          <>
+            {user?._id == userId
+              ?
+              <CreatePost callBackFeeds={callBackFeeds} />
+
+              :
+              ''
+            }
+            {posts.length > 0
+              ?
+              <>
+                {posts
+                  .filter(post => post.postOwner == userId)
+                  .map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+              </>
+              : ''
+            }
+          </>
+        }
+        {!userId
           ?
           <>
-            {posts
-            .filter(post=> post.postOwner == userId)
-            .map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+            <CreatePost callBackFeeds={callBackFeeds} />
+            {posts.length > 0
+              ?
+              <>
+                {posts.map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+              </>
+              : ''
+            }
           </>
-          : ''
+          :
+          ""
         }
+
       </div>
     </>
 

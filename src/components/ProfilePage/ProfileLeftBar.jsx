@@ -18,30 +18,18 @@ const ProfileLeftBar = ({ userId }) => {
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
 
   const callBackFollowingList = () => {
-    if (user && userId == user?._id) {
-      apiServices
-        .getFollowingsRoute(user._id, header)
-        .then(followingList => {
-          setFollowingsList(followingList.data)
-        })
-        .catch(error => {
-          const errorDescription = error.response.data.message;
-          console.log("error getting all followings", errorDescription)
-          setErrorMessage(errorDescription);
-        })
 
-    } if (user && userId != user?._id) {
-      apiServices
-        .getFollowingsRoute(userId, header)
-        .then(followingList => {
-          setFollowingsList(followingList.data)
-        })
-        .catch(error => {
-          const errorDescription = error.response.data.message;
-          console.log("error getting all followings", errorDescription)
-          setErrorMessage(errorDescription);
-        })
-    }
+    apiServices
+      .getFollowingsRoute(userId, header)
+      .then(followingList => {
+        setFollowingsList(followingList.data)
+      })
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log("error getting all followings", errorDescription)
+        setErrorMessage(errorDescription);
+      })
+
   }
   useEffect(() => {
     callBackFollowingList()
