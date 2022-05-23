@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const [followersList, setFollowersList] = useState([])
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [userDetail, setUserDetail] = useState({});
-
+  const [followresponse, setFollowresponse] = useState([])
 
 
   const storedToken = localStorage.getItem("authToken");
@@ -25,13 +25,14 @@ const ProfilePage = () => {
   const handleFollow = () => {
     apiServices
       .followUserRoute(userId, header, header)
-      .then(response => console.log(response))
+      .then(response => setFollowresponse(response.data))
       .catch(error => {
         const errorDescription = error.response.data.message;
         console.log("error  followings users", errorDescription)
         setErrorMessage(errorDescription);
       })
   }
+
 
   useEffect(() => {
     apiServices
@@ -104,7 +105,8 @@ const ProfilePage = () => {
 
   const birthdayDate = String(userDetail.birthday).substring(0, 10)
 
-
+  const followbtn = followresponse?.filter(usr => usr._id == userId && usr?.followers.includes(user._id))
+console.log(followresponse,"folowbtn",followbtn)
 
 
   return (
@@ -128,7 +130,7 @@ const ProfilePage = () => {
           <>
             {user?._id != userId
               ?
-              <button onClick={handleFollow}>Follow</button>
+              <button onClick={handleFollow}>{followbtn.length > 0 ? "Unfollow" : "Follow"}</button>
               :
               <NavLink to={`/profile/${userId}/setting`}> Edit Profile </NavLink>
             }
@@ -148,25 +150,25 @@ const ProfilePage = () => {
             <div className='ProfilePage-right-bottom-right-followerslist'>
               <h4 className='ProfilePage-right-followerslist-title' >Followers</h4>
               <span>
-                {followersList.length > 0 
+                {followersList.length > 0
                   ?
-            <>
-              <div>
-                {userId == user?._id
-                  ?
-                  <NavLink to={`/${user?._id}/followers`}>See All</NavLink>
-                  :
-                  <NavLink to={`/${userId}/followers`}>See All</NavLink>
-                }
-              </div>
-              <div>
-                {GetFollowersList()}
-              </div>
+                  <>
+                    <div>
+                      {userId == user?._id
+                        ?
+                        <NavLink to={`/${user?._id}/followers`}>See All</NavLink>
+                        :
+                        <NavLink to={`/${userId}/followers`}>See All</NavLink>
+                      }
+                    </div>
+                    <div>
+                      {GetFollowersList()}
+                    </div>
 
-            </>
-            :
-            ""}
-                
+                  </>
+                  :
+                  ""}
+
               </span>
             </div>
 
