@@ -37,7 +37,9 @@ const Post = ({ post, callBackFeeds }) => {
   }, [post])
 
   const likeUnlike = () => {
-    if (post.postLikes.includes(user._id)) {
+    const likes =post.postLikes.filter(like => like._id === user._id)
+    console.log(likes)
+      if(likes.length > 0) {
       return setLikeColor('crimson')
     } else {
       return setLikeColor('pink')
@@ -66,7 +68,10 @@ const Post = ({ post, callBackFeeds }) => {
   useEffect(() => {
     apiServices
       .userDetailsRoute(post.postOwner, header)
-      .then(response => setpostOwner(response.data))
+      .then(response => {
+        setpostOwner(response.data)
+      })
+      
       .catch(error => {
         const errorDescription = error.response.data.errorMessage;
         console.log("error getting user detail", errorDescription)
@@ -175,7 +180,7 @@ const Post = ({ post, callBackFeeds }) => {
     <div className='Post' >
       <div className='Post-container'>
         <div className='Post-top'>
-          <img src={postOwner.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
+          <img src={postOwner?.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
           <div className='Post-title'>
             <NavLink to={`/profile/${postOwner?._id}`}>
               <span className='Post-username'>{postOwner?.username}</span>
@@ -204,7 +209,7 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon onClick={showCommentBar} htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes.length} people like this`} </span>
+              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes[0].username } and ${post.postLikes.length} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               {user?._id == postOwner?._id
