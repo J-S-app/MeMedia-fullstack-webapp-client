@@ -146,7 +146,8 @@ const CreatePost = ({ callBackFeeds }) => {
         <hr className='CreatePost-hr' />
         <div className='CreatePost-buttom'>
           <div className='CreatePost-bbottom-buttons'>
-          <LinkTwoToneIcon className='CreatePost-file-input' />
+          <div className='CreatePost-file-input' ></div>
+          {/* <LinkTwoToneIcon className='CreatePost-file-input' /> */}
           {(title )&& (
             (!postContentForCD) &&(
             <button onClick={showUploadWidget} className="CreatePost-submit">Upload</button>
