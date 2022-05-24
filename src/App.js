@@ -11,6 +11,8 @@ import FollowingList from "./pages/FollowingList";
 import ProfileSetting from "./pages/ProfileSetting";
 import FollowersList from "./pages/FollowersList";
 import Messages from "./pages/Messages";
+import ErrorPage from "./pages/ErrorPage";
+import IsPrivate from './components/IsPrivate'
 
 
 function App() {
@@ -21,15 +23,16 @@ function App() {
 <Navbar />
       <Routes>
        
-          <Route  path='/' element={<HomePage />} />
+          <Route  path='/' element={<IsPrivate> <HomePage /></IsPrivate> } />
           <Route  path='/auth/login' element={<LogIn />} />
           <Route  path='/auth/signup' element={<Signup />} />
-          <Route  path='/profile/:userId' element={<ProfilePage />} />
-          <Route  path='/profile/:userId/setting' element={<ProfileSetting />} />
-          <Route  path='/editpost/:postId' element={<EditPost/>} />
-          <Route  path='/:userId/followings' element={<FollowingList />} />
-          <Route  path='/:userId/followers' element={<FollowersList />} />
-          <Route  path='/:userId/messages' element={<Messages />} />
+          <Route  path='/profile/:userId' element={<IsPrivate> <ProfilePage /></IsPrivate> } />
+          <Route  path='/profile/:userId/setting' element={<IsPrivate> <ProfileSetting /></IsPrivate> } />
+          <Route  path='/editpost/:postId' element={<IsPrivate> <EditPost/></IsPrivate> } />
+          <Route  path='/:userId/followings' element={<IsPrivate> <FollowingList /></IsPrivate> } />
+          <Route  path='/:userId/followers' element={<IsPrivate> <FollowersList /></IsPrivate> } />
+          <Route  path='/:userId/messages' element={<IsPrivate> <Messages /></IsPrivate> } />
+          <Route  path= "*" exact={true} element={<ErrorPage />} />    
 
       </Routes>
     </div>
