@@ -166,6 +166,11 @@ const ProfileSetting = () => {
     });
   }
 
+
+  const birthdayDate = String(birthday).substring(0, 10)
+
+
+
   return (
     <div className='ProfileSetting-container '>
       <h3 className='ProfileSetting-page-name'>Profile Setting</h3>
@@ -210,6 +215,7 @@ const ProfileSetting = () => {
           </div>
           <div className='ProfileSetting-right-top-country'>
             <label for="birthday">Birthday: </label>
+            <p>{String(birthday).substring(0, 10)}</p>
             <input type="date"
               id="birthday"
               value={birthday}

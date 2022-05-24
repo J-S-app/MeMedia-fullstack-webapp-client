@@ -14,7 +14,8 @@ const ProfilePage = () => {
   const [followersList, setFollowersList] = useState([])
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [userDetail, setUserDetail] = useState({});
-  const [followresponse, setFollowresponse] = useState([])
+  const [followresponse, setFollowresponse] = useState([]);
+  const [followUnfollow, setFollowUnfollow] = useState(false)
 
 
   const storedToken = localStorage.getItem("authToken");
@@ -44,7 +45,7 @@ const ProfilePage = () => {
         setErrorMessage(errorDescription);
       })
 
-  }, [userId])
+  }, [userId, followresponse])
 
 
 
@@ -78,7 +79,7 @@ const ProfilePage = () => {
   }
   useEffect(() => {
     callBackFollowersList()
-  }, [user?._id, userId])
+  }, [user?._id,followUnfollow, followresponse, userId])
 
 
   const GetFollowersList = () => {
@@ -100,13 +101,18 @@ const ProfilePage = () => {
 
   }
 
+  const FollowUnfollow = () => {
+
+    const followbtn = followresponse?.filter(usr => usr._id == userId && usr?.followers.includes(user._id))
+    if (followbtn.length > 0) setFollowUnfollow(true)
+    // else setFollowUnfollow(false)
+  }
+
 
 
 
   const birthdayDate = String(userDetail.birthday).substring(0, 10)
 
-  const followbtn = followresponse?.filter(usr => usr._id == userId && usr?.followers.includes(user._id))
-  console.log(followresponse, "folowbtn", followbtn)
 
 
   return (
@@ -130,7 +136,7 @@ const ProfilePage = () => {
           <>
             {user?._id != userId
               ?
-              <button className='ProfilePage-right-followbtn' onClick={handleFollow}>{followbtn.length > 0 ? "Unfollow" : "Follow"}</button>
+              <button className='ProfilePage-right-followbtn' onClick={handleFollow}>{followresponse ? "Unfollow" : "Follow"}</button>
               :
               <NavLink to={`/profile/${userId}/setting`}> Edit Profile </NavLink>
             }
@@ -146,7 +152,7 @@ const ProfilePage = () => {
               <p><b>Country : </b> {userDetail.country}</p>
               <p><b>About Meme : </b>{userDetail.aboutMeme}</p>
             </div>
-            <hr/>
+            <hr />
             <div className='ProfilePage-right-bottom-right-followerslist'>
               <h4 className='ProfilePage-right-followerslist-title' >Followers</h4>
               <span>
