@@ -35,7 +35,6 @@ const CreatePost = ({ callBackFeeds }) => {
         setPostContentForCD('')
       })
       .catch(e => {
-        console.log(header)
         console.log('error creating post', e)
       })
 

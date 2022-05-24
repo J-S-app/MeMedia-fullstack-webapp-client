@@ -37,8 +37,7 @@ const Post = ({ post, callBackFeeds }) => {
   }, [post])
 
   const likeUnlike = () => {
-    const likes =post.postLikes.filter(like => like._id === user._id)
-    console.log(likes)
+    const likes =post?.postLikes.filter(like => like._id === user?._id)
       if(likes.length > 0) {
       return setLikeColor('crimson')
     } else {
@@ -110,7 +109,6 @@ const Post = ({ post, callBackFeeds }) => {
 
       })
       .catch(e => {
-        console.log(header)
         console.log('error creating comment', e)
       })
 

@@ -56,7 +56,6 @@ const ProfileSetting = () => {
     apiServices
       .updateUserRoute(userId, requestBody, header)
       .then(response => {
-        console.log('Response of Update user', response)
         navigate(`/profile/${userId}`)
       })
       .catch(error => {
