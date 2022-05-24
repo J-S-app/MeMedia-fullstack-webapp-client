@@ -66,7 +66,10 @@ const Post = ({ post, callBackFeeds }) => {
   useEffect(() => {
     apiServices
       .userDetailsRoute(post.postOwner, header)
-      .then(response => setpostOwner(response.data))
+      .then(response => {
+        setpostOwner(response.data)
+      })
+      
       .catch(error => {
         const errorDescription = error.response.data.errorMessage;
         console.log("error getting user detail", errorDescription)
@@ -175,7 +178,7 @@ const Post = ({ post, callBackFeeds }) => {
     <div className='Post' >
       <div className='Post-container'>
         <div className='Post-top'>
-          <img src={postOwner.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
+          <img src={postOwner?.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
           <div className='Post-title'>
             <NavLink to={`/profile/${postOwner?._id}`}>
               <span className='Post-username'>{postOwner?.username}</span>
