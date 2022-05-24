@@ -149,7 +149,7 @@ button [type="submit"]:hover {
 
 .ProfileSetting-submit {
   padding: 10px 25px;
-  background-color: #407088;
+  background-color: #81acbd	; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -157,12 +157,12 @@ button [type="submit"]:hover {
 }
 
 .ProfileSetting-submit:hover {
-  background-color: #65a2b0;
+  background-color: #5F9EA0; 
 }
 
 .ProfileSettings-image-validation-message {
   padding: 10px 25px;
-  background-color: #ffb5b5;
+  background-color: #81acbd	; 
   color: white;
   border: none;
   border-radius: 8px;

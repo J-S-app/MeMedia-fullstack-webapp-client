@@ -41,7 +41,7 @@ const Post = ({ post, callBackFeeds }) => {
       if(likes.length > 0) {
       return setLikeColor('crimson')
     } else {
-      return setLikeColor('pink')
+      return setLikeColor('PeachPuff')
     }
   };
 

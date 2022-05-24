@@ -24,7 +24,7 @@ const Comment = ({ comment, callBackFeeds }) => {
     if (comment.commentLikes.includes(user._id)) {
       return setLikeColor('crimson')
     } else {
-      return setLikeColor('pink')
+      return setLikeColor('PeachPuff')
     }
   };
 

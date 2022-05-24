@@ -63,7 +63,7 @@ align-items: center;
 
 .CreatePost-submit{
   padding:10px 25px;
-  background-color: #ffb5b5; 
+  background-color: #81acbd	; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -71,7 +71,7 @@ align-items: center;
 }
 
 .CreatePost-submit:hover{
-  background-color: #f48f8f; 
+  background-color: #5F9EA0; 
 }
 
 .CreatePost-discard{
@@ -84,6 +84,6 @@ align-items: center;
 }
 
 .CreatePost-discard:hover{
-  background-color: #d6804e; 
+  background-color: #5F9EA0; 
 }
 

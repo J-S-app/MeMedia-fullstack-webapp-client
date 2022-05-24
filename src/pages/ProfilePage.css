@@ -100,7 +100,7 @@ width: 90%;
 
 .ProfilePage-right-followbtn{
   padding:10px 25px;
-  background-color: #ffb5b5; 
+  background-color: #81acbd	; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -108,5 +108,5 @@ width: 90%;
 }
 
 .ProfilePage-right-followbtn:hover{
-  background-color: #f48f8f; 
+  background-color: #5F9EA0; 
 }
