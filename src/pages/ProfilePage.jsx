@@ -7,6 +7,8 @@ import apiServices from '../services/APIServices';
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from 'react-router-dom';
 
+
+
 const ProfilePage = () => {
   const { userId } = useParams()
   const { user } = useContext(AuthContext);
@@ -33,6 +35,29 @@ const ProfilePage = () => {
         setErrorMessage(errorDescription);
       })
   }
+
+
+
+  const handleCreateMessage = () => {
+
+    const requestBody = {
+      currentUserId: user?._id,
+      messageReciverId: userId
+    }
+
+    apiServices
+      .createChatRoute(requestBody,header)
+      .then(response=>console.log(response.data))
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log("error  getting user detail", errorDescription)
+        setErrorMessage(errorDescription);
+      })
+  }
+
+
+
+
 
 
   useEffect(() => {
@@ -79,7 +104,7 @@ const ProfilePage = () => {
   }
   useEffect(() => {
     callBackFollowersList()
-  }, [user?._id,followUnfollow, followresponse, userId])
+  }, [user?._id, followUnfollow, followresponse, userId])
 
 
   const GetFollowersList = () => {
@@ -136,7 +161,10 @@ const ProfilePage = () => {
           <>
             {user?._id != userId
               ?
-              <button className='ProfilePage-right-followbtn' onClick={handleFollow}>{followresponse ? "Unfollow" : "Follow"}</button>
+              <div>
+                <NavLink to={`/${user._id}/messages`}> <button className='ProfilePage-right-followbtn' onClick={handleCreateMessage}>Send Message</button> </NavLink>
+                <button className='ProfilePage-right-followbtn' onClick={handleFollow}>{followresponse ? "Unfollow" : "Follow"}</button>
+              </div>
               :
               <NavLink to={`/profile/${userId}/setting`}> Edit Profile </NavLink>
             }

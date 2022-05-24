@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context"
 import { useState, useEffect, useContext, useRef } from "react";
 import apiServices from '../services/APIServices';
 import { io } from "socket.io-client";
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -21,12 +22,12 @@ const Messages = () => {
   const [comingMessage, setComingMessage] = useState(null);
   const [onlineFriends, setOnlineFriends] = useState([]);
   const [currentUserDet, setCurrentUserDet] = useState({});
-
+  const { userId } = useParams()
 
 
 
   const scrollRef = useRef()
-  const socket = useRef();
+  // const socket = useRef();
 
 
   const storedToken = localStorage.getItem("authToken");
@@ -35,21 +36,21 @@ const Messages = () => {
 
 
 
-  useEffect(() => {
-    socket.current = io("ws://localhost:5600")
-  
-  }, [])
+  // useEffect(() => {
+  //   socket.current = io("ws://localhost:5600")
 
-  useEffect(() => {
-    socket.current.on("getMessage", data => {
-      setComingMessage({
-        messageSender: data.senderId,
-        messageText: data.text,
-        createdAt: Date.now()
+  // }, [])
 
-      })
-    })
-  }, [comingMessage]);
+  // useEffect(() => {
+  //   socket.current.on("getMessage", data => {
+  //     setComingMessage({
+  //       messageSender: data.senderId,
+  //       messageText: data.text,
+  //       createdAt: Date.now()
+
+  //     })
+  //   })
+  // }, [comingMessage]);
 
 
 
@@ -63,33 +64,33 @@ const Messages = () => {
 
 
 
+  // useEffect(() => {
+
+  //     socket.current.emit("addUser",userId)
+  //     // socket.current.on("getUsers", users => {
+  //     //   setOnlineFriends(currentUserDet.followers.filter(flwr => users.find(usr => usr.userId == flwr)))
+  //     // })
+
+
+  // }, [userId])
+
+
+
+
+
   useEffect(() => {
-    if(user){
-      socket.current.emit("addUser", user?._id)
-      socket.current.on("getUsers", users => {
-        setOnlineFriends(currentUserDet.followers.filter(flwr => users.find(usr => usr.userId == flwr)))
+
+    apiServices
+      .getAllChatsRoute(userId, header)
+      .then(allchatsRes => setChatPairs(allchatsRes.data))
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log("error getting all chats", errorDescription)
+        setErrorMessage(errorDescription);
       })
-    }
-   
-  }, [user,onlineFriends])
 
 
-
-
-
-  useEffect(() => {
-    if (user) {
-      apiServices
-        .getAllChatsRoute(user._id, header)
-        .then(allchatsRes => setChatPairs(allchatsRes.data))
-        .catch(error => {
-          const errorDescription = error.response.data.message;
-          console.log("error getting all chats", errorDescription)
-          setErrorMessage(errorDescription);
-        })
-    }
-
-  }, [user._id])
+  }, [userId])
 
 
 
@@ -97,7 +98,7 @@ const Messages = () => {
 
 
   useEffect(() => {
-    if(currentChat){
+    if (currentChat) {
       apiServices
         .getAllMessageRoute(currentChat._id, header)
         .then(allmsgRes => setMessage(allmsgRes.data))
@@ -106,8 +107,8 @@ const Messages = () => {
           console.log("error getting all chats", errorDescription)
           setErrorMessage(errorDescription);
         })
-      }
-    
+    }
+
 
 
   }, [currentChat])
@@ -117,22 +118,22 @@ const Messages = () => {
 
 
 
-  useEffect(() => {
-    if (user) {
-      apiServices
-      .userDetailsRoute(user._id, header)
-      .then(response => {
-        setCurrentUserDet(response.data)
-      })
-      .catch(error => {
-        const errorDescription = error.response.data.message;
-        console.log("error getting all followers", errorDescription)
-        setErrorMessage(errorDescription);
-      })
-    }
-   
+  // useEffect(() => {
 
-  }, [user])
+  //     apiServices
+  //     .userDetailsRoute(userId, header)
+  //     .then(response => {
+  //       setCurrentUserDet(response.data)
+  //     })
+  //     .catch(error => {
+  //       const errorDescription = error.response.data.message;
+  //       console.log("error getting all followers", errorDescription)
+  //       setErrorMessage(errorDescription);
+  //     })
+
+
+
+  // }, [userId])
 
 
 
@@ -143,17 +144,17 @@ const Messages = () => {
 
     const requestBody = {
       messageId: currentChat?._id,
-      messageSender: user?._id,
+      messageSender: userId,
       messageText: newMessage
     }
 
-    const receiverId = currentChat.chatPair.find(usr => usr != user?._id)
+    const receiverId = currentChat.chatPair.find(usr => usr != userId)
 
-    socket.current.emit("sendMessage", {
-      senderId: user._id,
-      receiverId,
-      text: newMessage
-    })
+    // socket.current.emit("sendMessage", {
+    //   senderId: userId,
+    //   receiverId,
+    //   text: newMessage
+    // })
 
     apiServices
       .createMessageRoute(requestBody, header)
@@ -181,15 +182,21 @@ const Messages = () => {
 
 
 
-const callBackUpdatChat=(chatHistory)=>{
-  setCurrentChat(chatHistory)
-}
+  const callBackUpdatChat = (chatHistory) => {
+    setCurrentChat(chatHistory)
+  }
 
 
 
-useEffect(() => {
- callBackUpdatChat()
-}, [])
+  useEffect(() => {
+    callBackUpdatChat()
+  }, [])
+
+
+  const handleRefresh = (e) => {
+    e.preventDefault()
+  }
+
 
 
 
@@ -200,8 +207,8 @@ useEffect(() => {
           {/* <input placeholder='search' className="Messages-leftbar-input"  type="search" /> */}
           {chatPairs.map(conversation => {
             return (
-              <div onClick={() =>callBackUpdatChat(conversation)}>
-                <CurrentFriend chat={conversation} currentUser={user} />
+              <div onClick={() => callBackUpdatChat(conversation)}>
+                <CurrentFriend chat={conversation} currentUser={userId} />
               </div>
             )
           })}
@@ -213,18 +220,18 @@ useEffect(() => {
           {currentChat
             ?
             <>
-            <div className='Messages-center-top'>
-            {message.map(msg =>{
-              return (
-                <div ref={scrollRef}> <Chat message={msg} own={msg.messageSender == user._id} /></div>
-              )
-              
-               })}
-            </div>
+              <div className='Messages-center-top'>
+                {message?.map(msg => {
+                  return (
+                    <div ref={scrollRef}> <Chat message={msg} own={msg.messageSender == userId} /></div>
+                  )
+
+                })}
+              </div>
               <div >
                 <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
-                  required
+                    required
                     type='text'
                     value={newMessage}
                     className='Messages-center-bottom-input'
@@ -233,6 +240,7 @@ useEffect(() => {
                   ></textarea>
                   <button className='Messages-center-bottom-submitbtn'>send</button>
                 </form>
+
               </div>
             </>
             :
@@ -244,7 +252,7 @@ useEffect(() => {
       </div>
       <div className='Messages-rightbar'>
         <div className='Messages-rightbar-wrapper'>
-          <OnlineFriends onlineUsers={onlineFriends}  setCurrentChat={callBackUpdatChat} />
+          {/* <OnlineFriends onlineUsers={onlineFriends}  setCurrentChat={callBackUpdatChat} /> */}
         </div>
       </div>
     </div>

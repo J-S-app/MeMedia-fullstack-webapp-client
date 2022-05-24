@@ -29,7 +29,7 @@ function App() {
           <Route  path='/editpost/:postId' element={<EditPost/>} />
           <Route  path='/:userId/followings' element={<FollowingList />} />
           <Route  path='/:userId/followers' element={<FollowersList />} />
-          {/* <Route  path='/:userId/messages' element={<Messages />} /> */}
+          <Route  path='/:userId/messages' element={<Messages />} />
 
       </Routes>
     </div>

@@ -14,9 +14,8 @@ const CurrentFriend = ({ chat, currentUser }) => {
 
 
   useEffect(() => {
-    if(currentUser){ 
-      const friendId = chat.chatPair.find(pair => pair != currentUser._id)
-      console.log(friendId)
+   
+      const friendId = chat.chatPair.find(pair => pair != currentUser)
       apiServices
         .userDetailsRoute(friendId, header)
         .then(friendDet => setFriend(friendDet.data))
@@ -25,9 +24,9 @@ const CurrentFriend = ({ chat, currentUser }) => {
           console.log("error getting chatPair detail", errorDescription)
           setErrorMessage(errorDescription);
         })
-    }
+    
 
-  }, [chat, currentUser._id])
+  }, [chat, currentUser])
 
 
   return (
