@@ -207,7 +207,7 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon onClick={showCommentBar} htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes[0].username } and ${post.postLikes.length} people like this`} </span>
+              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : post.postLikes.length == 1 ?  `${post.postLikes[0].username } like this` :post.postLikes.length > 1  ?  `${post.postLikes[post.postLikes.length-1].username } and ${post.postLikes.length-1} people like this` : ''} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               {user?._id == postOwner?._id
