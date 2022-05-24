@@ -224,6 +224,7 @@ useEffect(() => {
               <div >
                 <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
+                  required
                     type='text'
                     value={newMessage}
                     className='Messages-center-bottom-input'
