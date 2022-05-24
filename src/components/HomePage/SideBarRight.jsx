@@ -41,10 +41,7 @@ const SideBarRight = () => {
   return (
     <div className='SideBar-right'>
       <div className='SideBar-right-container'>
-        <div className='SideBar-right-birthday'>
-          <CakeTwoToneIcon htmlColor='tomato' className='SideBar-right-birthday-icon' />
-          <span className='SideBar-right-birthday-text'>Happy Birthday XXXX Username</span>
-        </div>
+        
         <h4 className='SideBar-right-random-meme-title'>Random Meme</h4>
         <img src={require(`../../assets/memes/(${randomizedMeme}).jpg`)} className="SideBar-right-random-meme" onClick={(e)=>{setRandomizedMeme(Math.floor(Math.random()*(42-1+1)+1))}}/>
         <hr />
