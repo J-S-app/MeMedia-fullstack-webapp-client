@@ -1,0 +1,28 @@
+.ErrorPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.ErrorPage-image{
+  width:50%;
+  margin-top: 20%;
+  margin-bottom: 30px;
+}
+
+
+.ErrorPage-btn{
+  padding:10px 25px;
+  background-color: #ffb5b5; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.ErrorPage-btn:hover{
+  background-color: #f48f8f; 
+}
