@@ -37,7 +37,9 @@ const Post = ({ post, callBackFeeds }) => {
   }, [post])
 
   const likeUnlike = () => {
-    if (post.postLikes.includes(user._id)) {
+    const likes =post.postLikes.filter(like => like._id === user._id)
+    console.log(likes)
+      if(likes.length > 0) {
       return setLikeColor('crimson')
     } else {
       return setLikeColor('pink')
@@ -207,7 +209,7 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon onClick={showCommentBar} htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes.length} people like this`} </span>
+              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : `${post.postLikes[0].username } and ${post.postLikes.length} people like this`} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               {user?._id == postOwner?._id
