@@ -73,14 +73,14 @@ outline: none;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #ffb5b5; 
+  background-color: #81acbd	; 
   color: white;
   padding: 10px 20px;
 
 }
 
 .Messages-center-bottom-submitbtn:hover{
-  background-color: #f48f8f; 
+  background-color: #5F9EA0; 
 }
 
 
