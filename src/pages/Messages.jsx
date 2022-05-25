@@ -23,7 +23,7 @@ const Messages = () => {
   const [onlineFriends, setOnlineFriends] = useState([]);
   const [currentUserDet, setCurrentUserDet] = useState({});
   const { userId } = useParams()
-
+  const [refreshChat, setRefreshChat] = useState(true)
 
 
   const scrollRef = useRef()
@@ -34,6 +34,19 @@ const Messages = () => {
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
 
 
+const callbackRefresh=()=>{
+  if (currentChat) {
+    apiServices
+      .getAllMessageRoute(currentChat._id, header)
+      .then(allmsgRes => setMessage(allmsgRes.data))
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log("error getting all chats", errorDescription)
+        setErrorMessage(errorDescription);
+      })
+  }
+
+}
 
 
   // useEffect(() => {
@@ -53,13 +66,11 @@ const Messages = () => {
   // }, [comingMessage]);
 
 
-
-
   useEffect(() => {
     comingMessage &&
       currentChat?.chatPair.includes(comingMessage.messageSender) &&
       setMessage(preMsg => [...preMsg, comingMessage])
-  }, [comingMessage, currentChat])
+  }, [ message,currentChat])
 
 
 
@@ -76,8 +87,6 @@ const Messages = () => {
 
 
 
-
-
   useEffect(() => {
 
     apiServices
@@ -91,10 +100,6 @@ const Messages = () => {
 
 
   }, [userId])
-
-
-
-
 
 
   useEffect(() => {
@@ -114,10 +119,6 @@ const Messages = () => {
   }, [currentChat])
 
 
-
-
-
-
   // useEffect(() => {
 
   //     apiServices
@@ -134,9 +135,6 @@ const Messages = () => {
 
 
   // }, [userId])
-
-
-
 
 
   const handleSubmit = (e) => {
@@ -179,25 +177,13 @@ const Messages = () => {
 
 
 
-
-
-
   const callBackUpdatChat = (chatHistory) => {
     setCurrentChat(chatHistory)
   }
 
-
-
   useEffect(() => {
     callBackUpdatChat()
   }, [])
-
-
-  const handleRefresh = (e) => {
-    e.preventDefault()
-  }
-
-
 
 
   return (
@@ -229,6 +215,7 @@ const Messages = () => {
                 })}
               </div>
               <div >
+              <button onClick={callbackRefresh} className='Messages-center-bottom-submitbtn'>Refresh</button>
                 <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
                     required
@@ -238,9 +225,8 @@ const Messages = () => {
                     placeholder='write message here...'
                     onChange={(e) => setNewMessage(e.target.value)}
                   ></textarea>
-                  <button className='Messages-center-bottom-submitbtn'>send</button>
+                  <button className='Messages-center-bottom-submitbtn'>send</button>          
                 </form>
-
               </div>
             </>
             :

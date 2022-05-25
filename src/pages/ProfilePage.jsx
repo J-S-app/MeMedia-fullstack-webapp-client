@@ -70,7 +70,6 @@ const ProfilePage = () => {
 
 
 
-
   //get followers list
   const callBackFollowersList = () => {
     if (user) {
@@ -102,7 +101,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     callBackFollowersList()
-    FollowUnfollow()
+    
   }, [user?._id, followresponse, userId])
 
 
