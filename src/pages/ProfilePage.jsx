@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [userDetail, setUserDetail] = useState({});
   const [followresponse, setFollowresponse] = useState([]);
-  const [followUnfollow, setFollowUnfollow] = useState(false)
+
 
 
   const storedToken = localStorage.getItem("authToken");
@@ -37,7 +37,6 @@ const ProfilePage = () => {
   }
 
 
-
   const handleCreateMessage = () => {
 
     const requestBody = {
@@ -45,19 +44,16 @@ const ProfilePage = () => {
       messageReciverId: userId
     }
 
+
     apiServices
-      .createChatRoute(requestBody,header)
-      .then(response=>console.log(response.data))
+      .createChatRoute(requestBody, header)
+      .then(response => console.log(response.data))
       .catch(error => {
         const errorDescription = error.response.data.message;
         console.log("error  getting user detail", errorDescription)
         setErrorMessage(errorDescription);
       })
   }
-
-
-
-
 
 
   useEffect(() => {
@@ -102,9 +98,12 @@ const ProfilePage = () => {
         })
     }
   }
+
+
   useEffect(() => {
     callBackFollowersList()
-  }, [user?._id, followUnfollow, followresponse, userId])
+    FollowUnfollow()
+  }, [user?._id, followresponse, userId])
 
 
   const GetFollowersList = () => {
@@ -113,8 +112,9 @@ const ProfilePage = () => {
         return (
           <>
             <div className="SideBar-right-online-followers-item">
-              <img src={follower.profileImage || require("../assets/placeholder.png")} className="SideBar-right-fallowers-image" />
+
               <NavLink to={`/profile/${follower._id}`}>
+                <img src={follower.profileImage || require("../assets/placeholder.png")} className="SideBar-right-fallowers-image" />
                 <h5 className="SideBar-right-online-followers-name">{follower.username}</h5>
               </NavLink>
             </div>
@@ -123,17 +123,18 @@ const ProfilePage = () => {
       }
     })
     return result
-
-  }
-
-  const FollowUnfollow = () => {
-
-    const followbtn = followresponse?.filter(usr => usr._id == userId && usr?.followers.includes(user._id))
-    if (followbtn.length > 0) setFollowUnfollow(true)
-    // else setFollowUnfollow(false)
   }
 
 
+  const renderFollowButton = () => {
+    const isCurrentUserFollowingThisProfile = userDetail?.followers?.includes(user._id);
+    console.log(isCurrentUserFollowingThisProfile)
+    if (isCurrentUserFollowingThisProfile) {
+      return <button className='ProfilePage-right-followbtn' onClick={handleFollow}>Unfollow</button>
+    } else {
+      return <button className='ProfilePage-right-followbtn' onClick={handleFollow}>Follow</button>
+    }
+  }
 
 
   const birthdayDate = String(userDetail.birthday).substring(0, 10)
@@ -163,7 +164,7 @@ const ProfilePage = () => {
               ?
               <div>
                 <NavLink to={`/${user._id}/messages`}> <button className='ProfilePage-right-followbtn' onClick={handleCreateMessage}>Send Message</button> </NavLink>
-                <button className='ProfilePage-right-followbtn' onClick={handleFollow}>{followresponse ? "Unfollow" : "Follow"}</button>
+                {renderFollowButton()}
               </div>
               :
               <NavLink to={`/profile/${userId}/setting`}> Edit Profile </NavLink>
