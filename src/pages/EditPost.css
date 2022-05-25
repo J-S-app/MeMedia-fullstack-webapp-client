@@ -1,4 +1,25 @@
+.EditPost-items{
+  display: flex;
+  flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+
 .EditPost-joke-title{
   width: 50%;
+}
+
+.EditPost-btn{
+  padding:10px 25px;
+  background-color: #81acbd	; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.EditPost-btn:hover{
+  background-color: #5F9EA0; 
 }
 

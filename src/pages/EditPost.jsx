@@ -45,6 +45,7 @@ const EditPost = () => {
   return (
     <div className='EditPost-container'>
       <form onSubmit={handleSubmit}>
+        <div className='EditPost-items'>
         <div className='EditPost-joke-title'>
           <br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
           <InputEmoji
@@ -55,7 +56,10 @@ const EditPost = () => {
             onChange={setTitle}
           />
         </div>
-        <button>Edit</button>
+        <div>
+          <button className='EditPost-btn'>Edit</button>
+        </div>
+        </div>
       </form>
 
     </div>
