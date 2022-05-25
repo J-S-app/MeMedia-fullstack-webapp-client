@@ -148,7 +148,7 @@ const Messages = () => {
       messageText: newMessage
     }
 
-    const receiverId = currentChat.chatPair.find(usr => usr != userId)
+    // const receiverId = currentChat.chatPair.find(usr => usr != userId)
 
     // socket.current.emit("sendMessage", {
     //   senderId: userId,
