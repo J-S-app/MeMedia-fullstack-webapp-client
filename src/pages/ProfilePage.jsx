@@ -106,12 +106,11 @@ const ProfilePage = () => {
 
 
   const GetFollowersList = () => {
-    const result = followersList.map((follower, index) => {
+    const result = followersList?.map((follower, index) => {
       if (index < 8) {
         return (
           <>
             <div className="SideBar-right-online-followers-item">
-
               <NavLink to={`/profile/${follower._id}`}>
                 <img src={follower.profileImage || require("../assets/placeholder.png")} className="SideBar-right-fallowers-image" />
                 <h5 className="SideBar-right-online-followers-name">{follower.username}</h5>
@@ -143,7 +142,7 @@ const ProfilePage = () => {
   return (
     <div className="ProfilePage-container">
       <div className='ProfilePage-left'>
-        <ProfileLeftBar userId={userId} />
+        <ProfileLeftBar followersList={followersList}  userId={userId} />
       </div>
 
       <div className='ProfilePage-right'>
@@ -209,9 +208,6 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-
-
-
 
     </div>
   )

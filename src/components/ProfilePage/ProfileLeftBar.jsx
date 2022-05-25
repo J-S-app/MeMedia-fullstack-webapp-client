@@ -5,7 +5,7 @@ import apiServices from '../../services/APIServices';
 import { useState, useEffect, useContext } from "react";
 
 
-const ProfileLeftBar = ({ userId }) => {
+const ProfileLeftBar = ({ userId,followersList }) => {
 
 
   const [followingsList, setFollowingsList] = useState([])
@@ -33,7 +33,7 @@ const ProfileLeftBar = ({ userId }) => {
   }
   useEffect(() => {
     callBackFollowingList()
-  }, [user?._id, userId])
+  }, [user?._id, userId,followersList])
 
 
   const GetFollowingsList = () => {
