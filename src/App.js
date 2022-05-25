@@ -13,6 +13,7 @@ import FollowersList from "./pages/FollowersList";
 import Messages from "./pages/Messages";
 import ErrorPage from "./pages/ErrorPage";
 import IsPrivate from './components/IsPrivate'
+import IsAnon from "./components/IsAnon"; 
 
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
       <Routes>
        
           <Route  path='/' element={<IsPrivate> <HomePage /></IsPrivate> } />
-          <Route  path='/auth/login' element={<LogIn />} />
-          <Route  path='/auth/signup' element={<Signup />} />
+          <Route  path='/auth/login' element={<IsAnon><LogIn /></IsAnon>} />
+          <Route  path='/auth/signup' element={<IsAnon><Signup /></IsAnon>} />
           <Route  path='/profile/:userId' element={<IsPrivate> <ProfilePage /></IsPrivate> } />
           <Route  path='/profile/:userId/setting' element={<IsPrivate> <ProfileSetting /></IsPrivate> } />
           <Route  path='/editpost/:postId' element={<IsPrivate> <EditPost/></IsPrivate> } />
