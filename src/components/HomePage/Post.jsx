@@ -223,7 +223,7 @@ const Post = ({ post, callBackFeeds }) => {
             </div>
           </div>
           <div className='Post-buttom-right'>
-            <span className='Post-comment-counter'>{post?.postComments.length > 1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment`} </span>
+            <span onClick={showCommentBar} className='Post-comment-counter'>{post?.postComments.length > 1 ? `${post?.postComments.length} comments` : `${post?.postComments.length} comment`} </span>
           </div>
           {showComment
             &&
