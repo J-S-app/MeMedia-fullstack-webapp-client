@@ -49,6 +49,8 @@ font-size: 14px;
  width: 90%;
  margin-bottom: 30px;
  max-height: 500px;
+ border-radius: 6px;
+ cursor: pointer;
 
 
 }

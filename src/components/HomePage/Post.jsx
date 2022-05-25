@@ -37,8 +37,8 @@ const Post = ({ post, callBackFeeds }) => {
   }, [post])
 
   const likeUnlike = () => {
-    const likes =post?.postLikes.filter(like => like._id === user?._id)
-      if(likes.length > 0) {
+    const likes = post?.postLikes.filter(like => like._id === user?._id)
+    if (likes.length > 0) {
       return setLikeColor('crimson')
     } else {
       return setLikeColor('PeachPuff')
@@ -70,7 +70,7 @@ const Post = ({ post, callBackFeeds }) => {
       .then(response => {
         setpostOwner(response.data)
       })
-      
+
       .catch(error => {
         const errorDescription = error.response.data.errorMessage;
         console.log("error getting user detail", errorDescription)
@@ -178,9 +178,10 @@ const Post = ({ post, callBackFeeds }) => {
     <div className='Post' >
       <div className='Post-container'>
         <div className='Post-top'>
-          <img src={postOwner?.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
+
           <div className='Post-title'>
             <NavLink to={`/profile/${postOwner?._id}`}>
+              <img src={postOwner?.profileImage || require("../../assets/placeholder.png")} className='Post-profile-img' />
               <span className='Post-username'>{postOwner?.username}</span>
             </NavLink>
 
@@ -194,7 +195,7 @@ const Post = ({ post, callBackFeeds }) => {
           {post?.postContent && (
             <div className='Post-post-content'>
               <img
-               className='Post-shared-img' 
+                className='Post-shared-img'
                 src={post.postContent}
                 alt="chosen"
                 style={{ maxHeight: '300px' }}
@@ -207,7 +208,7 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon onClick={showCommentBar} htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : post.postLikes.length == 1 ?  `${post.postLikes[0].username } like this` :post.postLikes.length > 1  ?  `${post.postLikes[post.postLikes.length-1].username } and ${post.postLikes.length-1} people like this` : ''} </span>
+              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : post.postLikes.length == 1 ? `${post.postLikes[0].username} like this` : post.postLikes.length > 1 ? `${post.postLikes[post.postLikes.length - 1].username} and ${post.postLikes.length - 1} people like this` : ''} </span>
             </div>
             <div className='Post-buttom-left-right-icon'>
               {user?._id == postOwner?._id

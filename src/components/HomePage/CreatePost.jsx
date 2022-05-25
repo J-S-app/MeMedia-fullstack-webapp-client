@@ -24,9 +24,10 @@ const CreatePost = ({ callBackFeeds }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const requestBody = { 
+    const requestBody = {
       title,
-    postContent: postContentForCD }
+      postContent: postContentForCD
+    }
     apiServices
       .createPostRoute(requestBody, header)
       .then(response => {
@@ -69,7 +70,7 @@ const CreatePost = ({ callBackFeeds }) => {
       cropping: true,
       multiple: false,
       // folder: "user_images", 
-      tags: ["meme", "lol","memes"],
+      tags: ["meme", "lol", "memes"],
       // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
       // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
       // theme: "purple", //change to a purple theme
@@ -107,7 +108,7 @@ const CreatePost = ({ callBackFeeds }) => {
     });
   }
 
-  const handleDiscard = (e) =>{
+  const handleDiscard = (e) => {
     e.preventDefault()
     setPostContentForCD('')
   }
@@ -116,13 +117,16 @@ const CreatePost = ({ callBackFeeds }) => {
     <div className='CreatePost-Container'>
       <form onSubmit={handleSubmit} className='CreatePost-background-controller'>
         <div className='CreatePost-top'>
-          <div className='CreatePost-profile-title'>
-            <img src={userdet.profileImage || require("../../assets/placeholder.png")} className='CreatePost-profile-img' />
+          
+
             <NavLink to={`/profile/${userdet._id}`}>
+            <div className='CreatePost-profile-title'>
+              <img src={userdet.profileImage || require("../../assets/placeholder.png")} className='CreatePost-profile-img' />
               <h5>{userdet.username} </h5>
+              </div>
             </NavLink>
 
-          </div>
+         
           <InputEmoji
             name="text"
             value={title}
@@ -131,34 +135,34 @@ const CreatePost = ({ callBackFeeds }) => {
             onChange={setTitle}
           />
           <div className='CreatePost-buttom-preload'>
-        {postContentForCD && (
-            < >
-              <img
-                src={postContentForCD}
-                alt="chosen"
-                style={{ maxHeight: '100px' }}
-              />
-            </>
-          )}
+            {postContentForCD && (
+              < >
+                <img
+                  src={postContentForCD}
+                  alt="chosen"
+                  style={{ maxHeight: '100px' }}
+                />
+              </>
+            )}
           </div>
         </div>
         <hr className='CreatePost-hr' />
         <div className='CreatePost-buttom'>
           <div className='CreatePost-bbottom-buttons'>
-          <div className='CreatePost-file-input' ></div>
-          {/* <LinkTwoToneIcon className='CreatePost-file-input' /> */}
-          {(title )&& (
-            (!postContentForCD) &&(
-            <button onClick={showUploadWidget} className="CreatePost-submit">Upload</button>
-            )
-          )}
-          {(title )&& (
-            (postContentForCD) &&(
+            <div className='CreatePost-file-input' ></div>
+            {/* <LinkTwoToneIcon className='CreatePost-file-input' /> */}
+            {(title) && (
+              (!postContentForCD) && (
+                <button onClick={showUploadWidget} className="CreatePost-submit">Upload</button>
+              )
+            )}
+            {(title) && (
+              (postContentForCD) && (
 
-            <button onClick={handleDiscard} className="CreatePost-discard">Discard</button>
-            )
-          )}
-          <button className='CreatePost-submit'>Post</button>
+                <button onClick={handleDiscard} className="CreatePost-discard">Discard</button>
+              )
+            )}
+            <button className='CreatePost-submit'>Post</button>
           </div>
         </div>
       </form>

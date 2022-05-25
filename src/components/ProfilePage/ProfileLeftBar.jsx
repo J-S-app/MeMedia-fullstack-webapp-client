@@ -42,12 +42,11 @@ const ProfileLeftBar = ({ userId }) => {
         return (
           <>
             <div key={following._id} className="ProfileLeftBar-fallowers-list">
-              <img src={following.profileImage || require("../../assets/placeholder.png")} className="ProfileLeftBar-fallowers-image" />
-             
-             <div className="ProfileLeftBar-followers-name">
-              <NavLink to={`/profile/${following._id}`}>
-                <h5 >{following.username}</h5>
-              </NavLink>
+              <div className="ProfileLeftBar-followers-name">
+                <NavLink to={`/profile/${following._id}`}>
+                  <img src={following.profileImage || require("../../assets/placeholder.png")} className="ProfileLeftBar-fallowers-image" />
+                  <h5 >{following.username}</h5>
+                </NavLink>
               </div>
             </div>
           </>

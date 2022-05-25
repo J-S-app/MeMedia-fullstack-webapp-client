@@ -32,6 +32,7 @@ const SideBarRight = () => {
 
     }
   }
+  
   useEffect(() => {
     callBackFollowersList()
     setRandomizedMeme(Math.floor(Math.random()*(42-1+1)+1))
