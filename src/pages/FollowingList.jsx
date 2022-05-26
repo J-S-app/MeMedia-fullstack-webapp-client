@@ -51,21 +51,23 @@ const FollowingList = () => {
 
 
   return (
-    <div className='FollowingList-container'>
+    <>
+    <h1 style={{textAlign: "start" , marginLeft : "80px"}}>Followings</h1>
+    <div className='FollowingList'>
       {followingsList.length > 0
         ?
         followingsList.map((following) => {
 
           return (
-            <>
+            <div className='FollowingList-container'>
               <div key={following._id} className="FollowingList-fallowers-list">
-                <img src={following.profileImage || require("../assets/placeholder.png")} className="FollowingList-fallowers-image" />
                 <NavLink to={`/profile/${following._id}`}>
+                <img src={following.profileImage || require("../assets/placeholder.png")} className="FollowingList-fallowers-image" />
                 <h5 className="FollowingList-followers-name">{following.username}</h5>
                 </NavLink>
-                <span className="FollowingList-catchPhrase" >{following.catchPhrase}</span>
+                {/* <span className="FollowingList-catchPhrase" >{following.catchPhrase}</span> */}
               </div>
-            </>
+            </div>
           )
 
         })
@@ -73,6 +75,7 @@ const FollowingList = () => {
         ""
       }
     </div>
+    </>
   )
 }
 

@@ -47,7 +47,7 @@ const SideBarRight = () => {
         <img src={require(`../../assets/memes/(${randomizedMeme}).jpg`)} className="SideBar-right-random-meme" onClick={(e)=>{setRandomizedMeme(Math.floor(Math.random()*(42-1+1)+1))}}/>
         <hr />
         <div className='SideBar-Right-Follower-info'>
-          <h4 className='SideBar-right-online-followers-title' >Followers</h4>
+          <h4 className='SideBar-right-online-followers-title'>Friends</h4>
           <span>
             {followersList.length > 0 &&
               <NavLink to={`/${user?._id}/followers`}>See All</NavLink>
@@ -71,7 +71,7 @@ const SideBarRight = () => {
                 }
               })
               :
-              ''
+              <p style={{color : "GrayText"}}>You don't have any Friends</p>
             }
 
           </div>
