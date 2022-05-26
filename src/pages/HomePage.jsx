@@ -8,15 +8,18 @@ import { useState, useEffect, useContext } from "react";
 import ProfileFeeds from '../components/ProfilePage/ProfileFeeds'
 
 
-function HomePage() {
+function HomePage({postsList, postsFromDB ,callBackFeeds }) {
   const { user } = useContext(AuthContext);
 
   return (
     <>
       <div className="HomePage-Container">
 
-        <ProfileLeftBar userId={user?._id} />
-        <ProfileFeeds />
+        <ProfileLeftBar  userId={user?._id} />
+        {postsList &&
+        <ProfileFeeds postsList={postsList} callBackFeeds={callBackFeeds}/>
+
+        }
 
         <SideBarRight className='HomePage-item' />
       </div>
