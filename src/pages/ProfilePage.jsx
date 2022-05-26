@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 
 
-const ProfilePage = () => {
+const ProfilePage = ({postsList, callBackFeeds}) => {
   const { userId } = useParams()
   const { user } = useContext(AuthContext);
 
@@ -172,7 +172,7 @@ const ProfilePage = () => {
         </div>
         <div className='ProfilePage-right-userDetail'>
           <div className='ProfilePage-right-ProfileFeeds'>
-            <ProfileFeeds userId={userId} />
+            <ProfileFeeds userId={userId} postsList={postsList} callBackFeeds={callBackFeeds}/>
           </div>
           <div className='ProfilePage-right-bottom-right'>
             <div className='ProfilePage-right-bottom-right-userDetail'>
