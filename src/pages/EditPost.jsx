@@ -10,6 +10,7 @@ const EditPost = () => {
 
   const { postId } = useParams()
   const [title, setTitle] = useState('')
+  const [postContent, setPostContent] = useState('')
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
@@ -23,6 +24,7 @@ const EditPost = () => {
       .getOnePostRoute(postId, header)
       .then(postDetail => {
         setTitle(postDetail.data.title)
+        setPostContent(postDetail.data.postContent)
       })
       .catch((error) => console.log('error getting post detail', error));
 
@@ -46,19 +48,27 @@ const EditPost = () => {
     <div className='EditPost-container'>
       <form onSubmit={handleSubmit}>
         <div className='EditPost-items'>
-        <div className='EditPost-joke-title'>
-          <br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
-          <InputEmoji
-            name="text"
-            value={title}
-            placeholder='Post new joke'
-            className='EditPost-joke-title-input'
-            onChange={setTitle}
-          />
-        </div>
-        <div>
-          <button className='EditPost-btn'>Edit</button>
-        </div>
+          <div className='EditPost-joke-title'>
+            <br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
+            {postContent &&
+              <div className='EditPost-joke-title'>
+                <img
+                  src={postContent}
+                  style={{ maxHeight: '300px' }}
+                />
+              </div>
+            }
+            <InputEmoji
+              name="text"
+              value={title}
+              placeholder='Post new joke'
+              className='EditPost-joke-title-input'
+              onChange={setTitle}
+            />
+          </div>
+          <div>
+            <button className='EditPost-btn'>Edit</button>
+          </div>
         </div>
       </form>
 
