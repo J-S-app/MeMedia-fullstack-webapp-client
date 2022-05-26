@@ -50,7 +50,7 @@ const Messages = () => {
 
 
   useEffect(() => {
-    socket.current = io("ws:https://memedia-web-app.herokuapp.com/api:5600")
+    socket.current = io("ws:https://memedia-web-app.herokuapp.com")
   }, [])
 
   useEffect(() => {
