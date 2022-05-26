@@ -40,7 +40,7 @@ const ProfileLeftBar = ({ userId,followersList }) => {
     const result = followingsList.map((following, index) => {
       if (index < 8) {
         return (
-          <>
+          <div >
             <div key={following._id} className="ProfileLeftBar-fallowers-list">
               <div className="ProfileLeftBar-followers-name">
                 <NavLink to={`/profile/${following._id}`}>
@@ -49,7 +49,7 @@ const ProfileLeftBar = ({ userId,followersList }) => {
                 </NavLink>
               </div>
             </div>
-          </>
+          </div>
         )
       }
 
@@ -69,7 +69,7 @@ const ProfileLeftBar = ({ userId,followersList }) => {
           {followingsList.length > 0
             ?
             <>
-              <div>
+              <div className="ProfileLeftBar-seeAll">
                 {userId == user?._id
                   ?
                   <NavLink to={`/${user?._id}/followings`}>See All</NavLink>
@@ -77,13 +77,13 @@ const ProfileLeftBar = ({ userId,followersList }) => {
                   <NavLink to={`/${userId}/followings`}>See All</NavLink>
                 }
               </div>
-              <div>
+              <div className="ProfileLeftBar-fallowers-wrapper">
                 {GetFollowingsList()}
               </div>
 
             </>
             :
-            ""}
+            <p>you didn't fallow nobody </p>}
         </>
       </div>
 
