@@ -8,6 +8,7 @@ import './SignupPage.css'
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [randomizedMeme, setRandomizedMeme] = useState(2);
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -86,6 +87,7 @@ function LoginPage(props) {
         <Link to={"/auth/signup"}> Register</Link>
         </div>
       </div>
+      <img src={require(`../assets/memes/(${randomizedMeme}).jpg`)} className="SideBar-right-random-meme" onClick={(e) => { setRandomizedMeme(Math.floor(Math.random() * (42 - 1 + 1) + 1)) }} />
     </div>
   )
 }
