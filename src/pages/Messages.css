@@ -91,3 +91,20 @@ outline: none;
   color: rgb(190, 197, 212);
   cursor: default;
 }
+  
+
+  .Messages-center-bottom-refreshbtn{
+    margin-top: 20px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ffb26f; 
+    color: white;
+    padding: 12px 20px;
+    font-size: 20px;
+  }
+
+  .Messages-center-bottom-refreshbtn:hover{
+    background-color: #ff8f3a; 
+  }

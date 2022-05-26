@@ -215,7 +215,7 @@ const Messages = () => {
                 })}
               </div>
               <div >
-                <button onClick={callbackRefresh} className='Messages-center-bottom-submitbtn'>Refresh</button>
+                <button onClick={callbackRefresh} className='Messages-center-bottom-refreshbtn'>Click me to see new message</button>
                 <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
                     required
