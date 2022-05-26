@@ -27,7 +27,7 @@ const Messages = () => {
 
 
   const scrollRef = useRef()
-  const socket = useRef();
+  // const socket = useRef();
 
 
   const storedToken = localStorage.getItem("authToken");
@@ -49,40 +49,41 @@ const Messages = () => {
   }
 
 
-  useEffect(() => {
-    socket.current = io("https://memedia-web-app.herokuapp.com")
-  }, [])
+  // useEffect(() => {
+  //   socket.current = io("ws://localhost:5600")
 
-  useEffect(() => {
-    socket.current.on("getMessage", data => {
-      setComingMessage({
-        messageSender: data.senderId,
-        messageText: data.text,
-        createdAt: Date.now()
+  // }, [])
 
-      })
-    })
-  }, [comingMessage]);
+  // useEffect(() => {
+  //   socket.current.on("getMessage", data => {
+  //     setComingMessage({
+  //       messageSender: data.senderId,
+  //       messageText: data.text,
+  //       createdAt: Date.now()
+
+  //     })
+  //   })
+  // }, [comingMessage]);
 
 
   useEffect(() => {
     comingMessage &&
-      currentChat?.chatPair?.includes(comingMessage.messageSender) &&
+      currentChat?.chatPair.includes(comingMessage.messageSender) &&
       setMessage(preMsg => [...preMsg, comingMessage])
-  }, [comingMessage,currentChat])
+  }, [message, currentChat])
 
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-      socket.current.emit("addUser",userId)
-      socket.current.on("getUsers", users => {
-        setOnlineFriends(currentUserDet?.followers?.filter(flwr => users?.find(usr => usr.userId == flwr)))
-      })
+  //     socket.current.emit("addUser",userId)
+  //     // socket.current.on("getUsers", users => {
+  //     //   setOnlineFriends(currentUserDet.followers.filter(flwr => users.find(usr => usr.userId == flwr)))
+  //     // })
 
 
-  }, [userId,onlineFriends])
+  // }, [userId])
 
 
 
@@ -113,25 +114,27 @@ const Messages = () => {
         })
     }
 
+
+
   }, [currentChat])
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-      apiServices
-      .userDetailsRoute(userId, header)
-      .then(response => {
-        setCurrentUserDet(response.data)
-      })
-      .catch(error => {
-        const errorDescription = error.response.data.message;
-        console.log("error getting all followers", errorDescription)
-        setErrorMessage(errorDescription);
-      })
+  //     apiServices
+  //     .userDetailsRoute(userId, header)
+  //     .then(response => {
+  //       setCurrentUserDet(response.data)
+  //     })
+  //     .catch(error => {
+  //       const errorDescription = error.response.data.message;
+  //       console.log("error getting all followers", errorDescription)
+  //       setErrorMessage(errorDescription);
+  //     })
 
 
 
-  }, [userId])
+  // }, [userId])
 
 
   const handleSubmit = (e) => {
@@ -143,13 +146,13 @@ const Messages = () => {
       messageText: newMessage
     }
 
-    const receiverId = currentChat?.chatPair?.find(usr => usr != userId)
+    // const receiverId = currentChat.chatPair.find(usr => usr != userId)
 
-    socket.current.emit("sendMessage", {
-      senderId: userId,
-      receiverId,
-      text: newMessage
-    })
+    // socket.current.emit("sendMessage", {
+    //   senderId: userId,
+    //   receiverId,
+    //   text: newMessage
+    // })
 
     apiServices
       .createMessageRoute(requestBody, header)
@@ -212,7 +215,7 @@ const Messages = () => {
                 })}
               </div>
               <div >
-                {/* <button onClick={callbackRefresh} className='Messages-center-bottom-submitbtn'>Refresh</button> */}
+                <button onClick={callbackRefresh} className='Messages-center-bottom-submitbtn'>Refresh</button>
                 <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
                     required
