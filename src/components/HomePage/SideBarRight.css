@@ -92,3 +92,9 @@ font-size: 16px;
   margin-left: 250px;
 justify-self: flex-end;
 }
+
+
+.SideBarRight-noFriends-img{
+  width: 80%;
+  border-radius: 20px;
+}

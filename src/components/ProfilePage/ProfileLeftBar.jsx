@@ -83,7 +83,15 @@ const ProfileLeftBar = ({ userId,followersList }) => {
 
             </>
             :
-            <p>you didn't fallow nobody </p>}
+            <>
+            {userId == user?._id
+                  ?
+                  <img src={require("../../assets/nofolloing.jpg")} className="ProfileLeftBar-nofolloing-img" />
+                  :
+                  ''
+                }
+                </>
+            }
         </>
       </div>
 

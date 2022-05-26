@@ -181,7 +181,7 @@ const ProfilePage = () => {
             </div>
             <hr />
             <div className='ProfilePage-right-bottom-right-followerslist'>
-              <h4 className='ProfilePage-right-followerslist-title' >Followers</h4>
+              <h4 className='ProfilePage-right-followerslist-title' >Friends</h4>
               <span>
                 {followersList.length > 0
                   ?
@@ -200,7 +200,14 @@ const ProfilePage = () => {
 
                   </>
                   :
-                  ""}
+                  <div>
+                      {userId == user?._id
+                        ?
+                        <img src={require("../assets/nofriends.jpg")} className="SideBarRight-noFriends-img" />
+                        :
+                        ''
+                      }
+                    </div>}
 
               </span>
             </div>

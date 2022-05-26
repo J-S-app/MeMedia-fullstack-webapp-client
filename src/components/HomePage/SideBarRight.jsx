@@ -71,7 +71,7 @@ const SideBarRight = () => {
                 }
               })
               :
-              <p style={{ color: "GrayText" }}>You don't have any Friends</p>
+              <img src={require("../../assets/nofriends.jpg")} className="SideBarRight-noFriends-img" />
             }
 
           </div>
