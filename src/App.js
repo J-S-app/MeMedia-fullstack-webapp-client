@@ -20,7 +20,6 @@ import { AuthContext } from "./context/auth.context"
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
-  const [postsFromDB, setPostsFromDB] = useState([]);
   const [posts, setPosts] = useState([])
 
   const storedToken = localStorage.getItem("authToken");
@@ -34,7 +33,6 @@ function App() {
     apiServices
       .getPostListRoute(header)
       .then(response => {
-        setPostsFromDB(response.data.reverse())
         setPosts(response.data.reverse())
 
       })
@@ -46,7 +44,7 @@ function App() {
   }
 
   const postsSearch = (searchString) => {
-    const newPostList = ( searchString === '' ? postsFromDB : postsFromDB?.filter(singlePost => singlePost.title?.toLowerCase().includes(searchString.toLowerCase()) || singlePost.postOwner?.username?.toLowerCase().includes(searchString.toLowerCase())))
+    const newPostList = ( searchString === '' ? posts : posts?.filter(singlePost => singlePost.title?.toLowerCase().includes(searchString.toLowerCase()) || singlePost.postOwner?.username?.toLowerCase().includes(searchString.toLowerCase())))
     setPosts(newPostList)
   }
 
