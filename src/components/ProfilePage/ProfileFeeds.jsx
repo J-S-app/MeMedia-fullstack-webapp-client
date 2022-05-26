@@ -7,31 +7,17 @@ import { AuthContext } from '../../context/auth.context';
 
 
 
-const ProfileFeeds = ({ userId }) => {
-  const [posts, setPosts] = useState([]);
+const ProfileFeeds = ({ userId , postsList ,callBackFeeds}) => {
+  // const [posts, setPosts] = useState('');
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-
   const storedToken = localStorage.getItem("authToken");
-
-  const callBackFeeds = () => {
-    apiServices
-      .getPostListRoute({ headers: { Authorization: `Bearer ${storedToken}` } })
-      .then(response => setPosts(response.data.reverse()))
-      .catch(error => {
-        const errorDescription = error.response.data.message;
-        console.log("error getting all posts", errorDescription)
-        setErrorMessage(errorDescription);
-      })
-  }
 
   //getting all postes in database
   useEffect(() => {
     callBackFeeds()
-
-  }, [posts.postLikes])
-
+  }, []) 
 
   return (
     <>
@@ -40,17 +26,17 @@ const ProfileFeeds = ({ userId }) => {
           <>
             {user?._id == userId
               ?
-              <CreatePost callBackFeeds={callBackFeeds} />
+              <CreatePost  callBackFeeds={callBackFeeds}/>
 
               :
               ''
             }
-            {posts.length > 0
+            {postsList?.length > 0
               ?
               <>
-                {posts
+                {postsList
                   .filter(post => post.postOwner == userId)
-                  .map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+                  .map(post => <Post key={post._id} post={post} callBackFeeds={callBackFeeds}/>)}
               </>
               : ''
             }
@@ -60,10 +46,10 @@ const ProfileFeeds = ({ userId }) => {
           ?
           <>
             <CreatePost callBackFeeds={callBackFeeds} />
-            {posts.length > 0
+            {postsList?.length > 0
               ?
               <>
-                {posts.map(post => <Post key={post._id} callBackFeeds={callBackFeeds} post={post} />)}
+                {postsList.map(post => <Post key={post._id} post={post} callBackFeeds={callBackFeeds}/>)}
               </>
               : ''
             }
