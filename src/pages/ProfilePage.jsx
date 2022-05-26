@@ -106,12 +106,11 @@ const ProfilePage = ({postsList, callBackFeeds}) => {
 
 
   const GetFollowersList = () => {
-    const result = followersList.map((follower, index) => {
+    const result = followersList?.map((follower, index) => {
       if (index < 8) {
         return (
           <>
             <div className="SideBar-right-online-followers-item">
-
               <NavLink to={`/profile/${follower._id}`}>
                 <img src={follower.profileImage || require("../assets/placeholder.png")} className="SideBar-right-fallowers-image" />
                 <h5 className="SideBar-right-online-followers-name">{follower.username}</h5>
@@ -143,7 +142,7 @@ const ProfilePage = ({postsList, callBackFeeds}) => {
   return (
     <div className="ProfilePage-container">
       <div className='ProfilePage-left'>
-        <ProfileLeftBar userId={userId} />
+        <ProfileLeftBar followersList={followersList}  userId={userId} />
       </div>
 
       <div className='ProfilePage-right'>
@@ -182,7 +181,7 @@ const ProfilePage = ({postsList, callBackFeeds}) => {
             </div>
             <hr />
             <div className='ProfilePage-right-bottom-right-followerslist'>
-              <h4 className='ProfilePage-right-followerslist-title' >Followers</h4>
+              <h4 className='ProfilePage-right-followerslist-title' >Friends</h4>
               <span>
                 {followersList.length > 0
                   ?
@@ -201,7 +200,14 @@ const ProfilePage = ({postsList, callBackFeeds}) => {
 
                   </>
                   :
-                  ""}
+                  <div>
+                      {userId == user?._id
+                        ?
+                        <img src={require("../assets/nofriends.jpg")} className="SideBarRight-noFriends-img" />
+                        :
+                        ''
+                      }
+                    </div>}
 
               </span>
             </div>
@@ -209,9 +215,6 @@ const ProfilePage = ({postsList, callBackFeeds}) => {
           </div>
         </div>
       </div>
-
-
-
 
     </div>
   )

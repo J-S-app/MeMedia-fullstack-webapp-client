@@ -25,24 +25,44 @@
 text-decoration: none;
 color: #132743; 
 font-weight: 600;
-font-size: 14px;
+font-size: 16px;
 }
 .ProfileLeftBar-container a:hover{
   color: #407088; 
+}
+
+.ProfileLeftBar-fallowers-wrapper{
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  
+
 }
 
 .ProfileLeftBar-fallowers-list{
   margin-top: 15px;
   display: flex;
   align-items: center;
+
 }
+
+.ProfileLeftBar-followers-name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+
 
 .ProfileLeftBar-fallowers-image{
   margin-right: 10px;
-  width: 45px;
-  height: 45px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 12px;
 }
 
 .ProfileLeftBar-title{
@@ -54,4 +74,15 @@ font-size: 14px;
 
 .ProfileLeftBar-title h4{
   margin-right: 55 px;
+}
+
+
+.ProfileLeftBar-seeAll{
+  text-align: end;
+}
+
+
+.ProfileLeftBar-nofolloing-img{
+  width: 80%;
+  border-radius: 20px;
 }

@@ -34,19 +34,19 @@ const Messages = () => {
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
 
 
-const callbackRefresh=()=>{
-  if (currentChat) {
-    apiServices
-      .getAllMessageRoute(currentChat._id, header)
-      .then(allmsgRes => setMessage(allmsgRes.data))
-      .catch(error => {
-        const errorDescription = error.response.data.message;
-        console.log("error getting all chats", errorDescription)
-        setErrorMessage(errorDescription);
-      })
-  }
+  const callbackRefresh = () => {
+    if (currentChat) {
+      apiServices
+        .getAllMessageRoute(currentChat._id, header)
+        .then(allmsgRes => setMessage(allmsgRes.data))
+        .catch(error => {
+          const errorDescription = error.response.data.message;
+          console.log("error getting all chats", errorDescription)
+          setErrorMessage(errorDescription);
+        })
+    }
 
-}
+  }
 
 
   // useEffect(() => {
@@ -70,7 +70,7 @@ const callbackRefresh=()=>{
     comingMessage &&
       currentChat?.chatPair.includes(comingMessage.messageSender) &&
       setMessage(preMsg => [...preMsg, comingMessage])
-  }, [ message,currentChat])
+  }, [message, currentChat])
 
 
 
@@ -215,7 +215,7 @@ const callbackRefresh=()=>{
                 })}
               </div>
               <div >
-              <button onClick={callbackRefresh} className='Messages-center-bottom-submitbtn'>Refresh</button>
+                <button onClick={callbackRefresh} className='Messages-center-bottom-refreshbtn'>Click me to see new message</button>
                 <form className='Messages-center-bottom' onSubmit={handleSubmit}>
                   <textarea
                     required
@@ -225,14 +225,20 @@ const callbackRefresh=()=>{
                     placeholder='write message here...'
                     onChange={(e) => setNewMessage(e.target.value)}
                   ></textarea>
-                  <button className='Messages-center-bottom-submitbtn'>send</button>          
+                  <button className='Messages-center-bottom-submitbtn'>send</button>
                 </form>
               </div>
             </>
             :
-            <span className="noConversationText"> Start a new chat</span>
+            <>
+              {chatPairs.length > 0
+                ?
+                <span className="noConversationText"> Start a new chat</span>
+                :
+                <span className="noConversationText"> you dont have any conversation yet</span>
+              }
+            </>
           }
-
 
         </div>
       </div>

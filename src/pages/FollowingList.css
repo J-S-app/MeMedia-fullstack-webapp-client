@@ -1,14 +1,30 @@
 
+.FollowingList {
+  display: flex;
+  margin-top: 100px;
+  margin-left: 50px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
 
 
-.FollowersList-fallowers-list a{
+.FollowingList-container{
+  margin-left: 30px;
+ 
+}
+
+
+
+.FollowingList-container  a{
   text-decoration: none;
   color: #132743; 
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
+  
 }
 
-.FollowersList-fallowers-list a:hover{
+.FollowingList-container a:hover{
   color: #407088; 
 }
 
@@ -16,8 +32,8 @@
 
 .FollowingList-fallowers-image{
   margin-right: 10px;
-  width: 45px;
-  height: 45px;
+  width: 100px;
+  height:  100px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 12px;
 }
