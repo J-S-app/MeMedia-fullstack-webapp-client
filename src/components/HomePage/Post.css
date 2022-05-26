@@ -9,7 +9,7 @@ box-shadow: 0px 10px 13px -7px #b5b4b4, 25px -14px 15px 26px rgba(242, 242, 242,
 }
 
 .Post:hover{
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(241, 239, 239);
   transform: scale(1.05) ;
   transition: all 0.5s;
 }
