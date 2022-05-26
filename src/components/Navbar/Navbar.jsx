@@ -8,15 +8,15 @@ import { AuthContext } from "../../context/auth.context";
 import apiServices from '../../services/APIServices';
 import EmailIcon from '@mui/icons-material/Email';
 
-const Navbar = () => {
+const Navbar = ({postsSearch, callBackFeeds}) => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [userDetail, setUserDetail] = useState({});
+  const [searchString, setSearchString] = useState('');
+  const [posts,setPosts] = useState([])
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
-
-
 
   const CallbackGetUserDetail = () => {
     if (user) {
@@ -31,20 +31,16 @@ const Navbar = () => {
     }
   }
 
-
-
   useEffect(() => {
-
     CallbackGetUserDetail()
-
+    callBackFeeds()
   }, [user?._id])
 
-
-
-
-
-
-
+  const handleSearch = (e) => {
+    e.preventDefault()
+    setSearchString(e.target.value)
+    postsSearch(e.target.value)
+  }
 
   return (
     <div className="Navbar-container">
@@ -55,7 +51,13 @@ const Navbar = () => {
             <NavLink to='/' className="Navbar-logo">
               MeMedia
             </NavLink>
-            <input className='Navbar-search-bar' placeholder='search for posts' type='search' />
+            <input 
+            className='Navbar-search-bar' 
+            placeholder='search for posts' 
+            type='search' 
+            value={searchString}
+            onChange={handleSearch}
+            />
           </div>
 
           <div className="Navbar-center">
