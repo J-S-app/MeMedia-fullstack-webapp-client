@@ -34,9 +34,7 @@ const ProfileFeeds = ({ userId , postsList ,callBackFeeds}) => {
             {postsList?.length > 0
               ?
               <>
-                {postsList
-                  .filter(post => post.postOwner == userId)
-                  .map(post => <Post key={post._id} post={post} callBackFeeds={callBackFeeds}/>)}
+                {postsList?.filter(post => post.postOwner._id == userId)?.map(post => <Post key={post._id} post={post} callBackFeeds={callBackFeeds}/>)}
               </>
               : ''
             }
