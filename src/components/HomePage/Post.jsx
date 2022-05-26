@@ -20,6 +20,7 @@ const Post = ({ post, callBackFeeds }) => {
   //add state for like functionality
   const [postOwner, setpostOwner] = useState('')
   const [likeColor, setLikeColor] = useState('')
+
   const [showComment, setShowComment] = useState(false)
   const [errorMessage, setErrorMessage] = useState(undefined);
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -29,10 +30,9 @@ const Post = ({ post, callBackFeeds }) => {
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
+  
   //add on click function for like functionality
-
-
-  useEffect(() => {
+    useEffect(() => {
     likeUnlike()
   }, [post])
 
@@ -66,7 +66,7 @@ const Post = ({ post, callBackFeeds }) => {
 
   useEffect(() => {
     apiServices
-      .userDetailsRoute(post.postOwner, header)
+      .userDetailsRoute(post.postOwner._id, header)
       .then(response => {
         setpostOwner(response.data)
       })
