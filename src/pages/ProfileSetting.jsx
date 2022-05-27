@@ -121,7 +121,7 @@ const ProfileSetting = () => {
       cloudName: "memediacloud",
       uploadPreset: "rgly7uw1",
       sources: ["local", "url", "camera", "image_search", "facebook", "dropbox", "instagram", "getty", "istock"],
-      googleApiKey: "<AIzaSyCOms5CX5Je-Yk92vxex2uWopweDa3Q6Kg>",
+      googleApiKey: "AIzaSyCOms5CX5Je-Yk92vxex2uWopweDa3Q6Kg",
       showAdvancedOptions: true,
       cropping: true,
       multiple: false,
