@@ -34,7 +34,7 @@ function App() {
     apiServices
       .getPostListRoute(header)
       .then(response => {
-        setPostsFromDB(response.data.reverse())
+        setPostsFromDB(response.data)
         setPosts(response.data.reverse())
 
       })
