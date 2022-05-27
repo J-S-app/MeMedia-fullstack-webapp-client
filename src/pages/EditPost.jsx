@@ -51,8 +51,9 @@ const EditPost = () => {
           <div className='EditPost-joke-title'>
             <br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
             {postContent &&
-              <div className='EditPost-joke-title'>
+              <div >
                 <img
+                className='EditPost-joke-img'
                   src={postContent}
                   style={{ maxHeight: '300px' }}
                 />
