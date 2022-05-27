@@ -72,7 +72,7 @@ const ProfilePage = ({postsList, callBackFeeds}) => {
 
   //get followers list
   const callBackFollowersList = () => {
-    if (user) {
+    if (user && userId == user?._id) {
       apiServices
         .getFollowersRoute(user._id, header)
         .then(response => {
