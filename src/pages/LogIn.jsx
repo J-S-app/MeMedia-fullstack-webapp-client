@@ -26,7 +26,7 @@ function LoginPage(props) {
         // login successful
 
         const jwt = response.data.authToken;
-        console.log('Login was sucessful. JWT token: ', jwt);
+        // console.log('Login was sucessful. JWT token: ', jwt);
 
         storeToken(jwt);
         authenticateUser();
