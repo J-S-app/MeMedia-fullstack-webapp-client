@@ -16,6 +16,7 @@ import IsPrivate from './components/IsPrivate'
 import IsAnon from "./components/IsAnon";
 import apiServices from "./services/APIServices"
 import { AuthContext } from "./context/auth.context"
+import WhoLikedPage from "./pages/WhoLikedPage";
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
         <Route path='/:userId/followings' element={<IsPrivate> <FollowingList /></IsPrivate>} />
         <Route path='/:userId/followers' element={<IsPrivate> <FollowersList /></IsPrivate>} />
         <Route path='/:userId/messages' element={<IsPrivate> <Messages /></IsPrivate>} />
+        <Route path='/likes/:postId' element={<IsPrivate> <WhoLikedPage /></IsPrivate>} />
         <Route path="*" exact={true} element={<ErrorPage />} />
 
       </Routes>

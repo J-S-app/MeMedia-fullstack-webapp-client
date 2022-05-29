@@ -30,9 +30,9 @@ const Post = ({ post, callBackFeeds }) => {
 
   const storedToken = localStorage.getItem("authToken");
   const header = { headers: { Authorization: `Bearer ${storedToken}` } }
-  
+
   //add on click function for like functionality
-    useEffect(() => {
+  useEffect(() => {
     likeUnlike()
   }, [post])
 
@@ -56,7 +56,7 @@ const Post = ({ post, callBackFeeds }) => {
         callBackFeeds()
       })
       .catch(error => {
-        const errorDescription = error.response.data.errorMessage;
+        const errorDescription = error.response.data.message;
         console.log("error like post ", errorDescription)
         setErrorMessage(errorDescription);
       })
@@ -208,7 +208,9 @@ const Post = ({ post, callBackFeeds }) => {
             <div className='Post-buttom-left-left-icon'>
               <ModeCommentIcon onClick={showCommentBar} htmlColor='CadetBlue' className='Post-buttom-icon' />
               <FavoriteIcon htmlColor={likeColor} onClick={likeHandler} className='Post-buttom-icon' />
-              <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : post.postLikes.length == 1 ? `${post.postLikes[0].username} like this` : post.postLikes.length > 1 ? `${post.postLikes[post.postLikes.length - 1].username} and ${post.postLikes.length - 1} people like this` : ''} </span>
+              <NavLink to={`/likes/${post?._id}`}>
+                <span className='Post-like-counter'> {post.postLikes.length == 0 ? `` : post.postLikes.length == 1 ? `${post.postLikes[0].username} like this` : post.postLikes.length > 1 ? `${post.postLikes[post.postLikes.length - 1].username} and ${post.postLikes.length - 1} people like this` : ''} </span>
+              </NavLink>
             </div>
             <div className='Post-buttom-left-right-icon'>
               {user?._id == postOwner?._id
